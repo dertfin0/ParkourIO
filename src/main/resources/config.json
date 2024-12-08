@@ -16,5 +16,8 @@
   "join-leave-messages" : {
     "join-message" : "<color:#801fdb>[<green>+</green>]</color> <gradient:#f0d9ff:#f1d6ff>%player%</gradient> <gradient:#a03bff:#c233ff>зашел!</gradient>",
     "leave-message" : "<color:#801fdb>[<red>-</red>]</color> <gradient:#f0d9ff:#f1d6ff>%player%</gradient> <gradient:#a03bff:#c233ff>вышел!</gradient>"
+  },
+  "chat" : {
+    "chat-message-format" : "%player% - %message%"
   }
 }
