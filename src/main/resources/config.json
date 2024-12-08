@@ -19,6 +19,7 @@
   },
   "chat" : {
     "chat-message-format" : "%player% - %message%",
-    "exclamation-prevent-message" : "<color:#5c64ff>На этом сервере не нужно писать \"<green> ! </green>\" перед сообщениями, весь чат является глобальным.</color>"
+    "exclamation-prevent-message" : "<color:#5c64ff>На этом сервере не нужно писать \"<green> ! </green>\" перед сообщениями, весь чат является глобальным.</color>",
+    "censored-message-warn-player" : "<red>Ваше сообщение не было отправлено, так как имеет запрещённые слова: <aqua><hover:show_text:'%words%'><obfuscated>censored</obfuscated></hover></aqua>.</red>"
   }
 }
