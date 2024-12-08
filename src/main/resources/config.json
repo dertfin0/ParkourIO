@@ -21,5 +21,14 @@
     "chat-message-format" : "%player% - %message%",
     "exclamation-prevent-message" : "<color:#5c64ff>На этом сервере не нужно писать \"<green> ! </green>\" перед сообщениями, весь чат является глобальным.</color>",
     "censored-message-warn-player" : "<red>Ваше сообщение не было отправлено, так как имеет запрещённые слова: <aqua><hover:show_text:'%words%'><obfuscated>censored</obfuscated></hover></aqua>.</red>"
+  },
+  "tab" : {
+    "header" : [
+      "",
+      "<gradient:#7733ff:#b82bff><b>ParkourIO</b></gradient>",
+      "  <color:#242424><i>Просто паркур, ничего лишнего</i></color>  "
+    ],
+    "footer" : [
+    ]
   }
 }

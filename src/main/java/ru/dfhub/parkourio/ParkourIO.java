@@ -5,6 +5,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import ru.dfhub.parkourio.components.Chat;
 import ru.dfhub.parkourio.components.JoinLeaveMessages;
 import ru.dfhub.parkourio.components.MOTD;
+import ru.dfhub.parkourio.components.TAB;
 import ru.dfhub.parkourio.components.spawn.SpawnOnJoin;
 import ru.dfhub.parkourio.util.Config;
 
@@ -23,7 +24,8 @@ public final class ParkourIO extends JavaPlugin {
                 new MOTD(),
                 new SpawnOnJoin(),
                 new JoinLeaveMessages(),
-                new Chat()
+                new Chat(),
+                new TAB()
         );
     }
 
