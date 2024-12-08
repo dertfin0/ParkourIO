@@ -1,4 +1,10 @@
 {
+  "motd" : {
+    "max-players" : 256,
+    "motds" : [
+      "Motd 1"
+    ]
+  },
   "spawn-location" : {
     "x" : 0,
     "y" : 0,
