@@ -18,6 +18,7 @@
     "leave-message" : "<color:#801fdb>[<red>-</red>]</color> <gradient:#f0d9ff:#f1d6ff>%player%</gradient> <gradient:#a03bff:#c233ff>вышел!</gradient>"
   },
   "chat" : {
-    "chat-message-format" : "%player% - %message%"
+    "chat-message-format" : "%player% - %message%",
+    "exclamation-prevent-message" : "<color:#5c64ff>На этом сервере не нужно писать \"<green> ! </green>\" перед сообщениями, весь чат является глобальным.</color>"
   }
 }
