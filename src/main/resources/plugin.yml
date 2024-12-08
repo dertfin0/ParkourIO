@@ -1,0 +1,4 @@
+name: ParkourIO
+version: '${version}'
+main: ru.dfhub.parkourio.ParkourIO
+api-version: '1.21'
