@@ -5,11 +5,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
-import ru.dfhub.parkourio.components.Chat;
-import ru.dfhub.parkourio.components.JoinLeaveMessages;
-import ru.dfhub.parkourio.components.MOTD;
-import ru.dfhub.parkourio.components.TAB;
+import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.spawn.SpawnOnJoin;
+import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
 import static org.bukkit.Bukkit.getPluginManager;
@@ -48,6 +46,12 @@ public final class ParkourIO extends JavaPlugin {
     private void registerEvents(Listener ...listeners) {
         for (Listener listener : listeners) {
             getPluginManager().registerEvents(listener, this);
+        }
+    }
+
+    private void registerCommands(CloudCommand ...commands) {
+        for (CloudCommand command : commands) {
+            command.register(manager);
         }
     }
 }
