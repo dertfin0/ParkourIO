@@ -33,6 +33,9 @@ public final class ParkourIO extends JavaPlugin {
                 new Chat(),
                 new TAB()
         );
+        registerCommands(
+                new PReloadCommand()
+        );
     }
 
     @Override
