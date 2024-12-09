@@ -34,7 +34,8 @@ public final class ParkourIO extends JavaPlugin {
                 new TAB()
         );
         registerCommands(
-                new PReloadCommand()
+                new PReloadCommand(),
+                new WorldCommand()
         );
     }
 
