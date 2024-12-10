@@ -1,4 +1,4 @@
-package ru.dfhub.parkourio.components;
+package ru.dfhub.parkourio.components.parkour_level;
 
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
@@ -17,7 +17,7 @@ public class ParkourLevel {
     private final int reward;
     private final ItemStack icon;
 
-    private ParkourLevel(JSONObject object) {
+    public ParkourLevel(JSONObject object) {
         id = object.getInt("id");
         reward = object.optInt("reward", 0);
 
