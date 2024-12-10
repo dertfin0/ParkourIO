@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.incendo.cloud.Command;
 import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
+import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
@@ -20,6 +21,10 @@ public class PReloadCommand implements CloudCommand {
                 .literal("config")
                 .handler(this::reloadConfig)
         );
+        manager.command(builder
+                .literal("levels")
+                .handler(this::reloadLevels)
+        );
     }
 
     public void handle(CommandContext<CommandSender> ctx) {}
@@ -28,6 +33,13 @@ public class PReloadCommand implements CloudCommand {
         Config.reload();
         ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
             "<green>Конфиг перезагружен!</green>"
+        ));
+    }
+
+    private void reloadLevels(CommandContext<CommandSender> ctx) {
+        ParkourLevels.reload();
+        ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
+                "<green>Уровни паркура перезагружены!</green>"
         ));
     }
 }

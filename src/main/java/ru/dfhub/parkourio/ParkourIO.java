@@ -6,6 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.components.*;
+import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.spawn.SpawnOnJoin;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
@@ -29,6 +30,7 @@ public final class ParkourIO extends JavaPlugin {
         );
 
         Config.reload();
+        ParkourLevels.reload();
         registerEvents(
                 new MOTD(),
                 new SpawnOnJoin(),
