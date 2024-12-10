@@ -1,6 +1,7 @@
 package ru.dfhub.parkourio.components.parkour_level;
 
 import org.bukkit.Bukkit;
+import org.bukkit.WorldCreator;
 import org.json.JSONArray;
 
 import java.nio.file.Files;
@@ -34,6 +35,14 @@ public class ParkourLevels {
      */
     public static ParkourLevel getLevelById(int id) {
         return parkourLevels.get(id);
+    }
+
+    /**
+     * Получить список всех уровней
+     * @return Паркур-уровни
+     */
+    public static List<ParkourLevel> getLevels() {
+        return parkourLevels;
     }
 
     private static String readLevelsFile() {

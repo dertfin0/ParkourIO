@@ -4,6 +4,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.WorldCreator;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
@@ -27,6 +28,7 @@ public class ParkourLevel {
         fallLevel = object.getInt("fall_level");
 
         JSONObject spawnJson = object.getJSONObject("spawn");
+        createWorld(spawnJson.getString("world")); // Загрузка мира для дальнейшей работы
         spawn = new Location(
                 Bukkit.getWorld(spawnJson.getString("world")),
                 spawnJson.getDouble("x"),
@@ -62,6 +64,10 @@ public class ParkourLevel {
         icon.setItemMeta(iconMeta);
 
         return icon;
+    }
+
+    private static void createWorld(String name) {
+        Bukkit.createWorld(new WorldCreator(name));
     }
 
     public int getId() {
