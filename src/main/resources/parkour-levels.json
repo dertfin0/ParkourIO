@@ -1,0 +1,24 @@
+[
+  {
+    "id" : 0,
+    "spawn" : {
+      "world" : "custom_or_default",
+      "x" : 0.5,
+      "y" : 0.5,
+      "z" : 0.5,
+      "yaw" : 0,
+      "pitch" : 0
+    },
+    "reward" : 10,
+    "icon-item" : {
+      "name" : "<green>Название уровня</green>",
+      "lore" : [
+        "<gray>Жесть, лооооооор</gray>",
+        "Сколько угодно строк, только бы в экран поместилось"
+      ],
+      "material" : "red_wool",
+      "amount" : 1,
+      "enchanted" : true
+    }
+  }
+]
