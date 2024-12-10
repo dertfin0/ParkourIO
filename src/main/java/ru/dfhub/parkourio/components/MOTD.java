@@ -10,6 +10,9 @@ import ru.dfhub.parkourio.util.Config;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Слушатель ивентов, отвечающий за MOTD (отображение в списке серверов)
+ */
 public class MOTD implements Listener {
 
     @EventHandler

@@ -8,6 +8,9 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import ru.dfhub.parkourio.util.Config;
 
+/**
+ * Слушатель, отвечающий за сообщения входа/выхода игрков
+ */
 public class JoinLeaveMessages implements Listener {
 
     @EventHandler

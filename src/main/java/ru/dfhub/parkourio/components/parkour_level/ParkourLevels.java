@@ -9,10 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 
+/**
+ * Утилита для работы с уровнями
+ */
 public class ParkourLevels {
 
-    private static final List<ParkourLevel> parkourLevels = new ArrayList<>(); // Levels loaded
+    private static final List<ParkourLevel> parkourLevels = new ArrayList<>(); // Загруженные сейчас уровни
 
+    /**
+     * Перезагрузить список уровней
+     */
     public static void reload() {
         JSONArray levelsJson = new JSONArray(readLevelsFile());
         for (int i = 0; i < levelsJson.length(); i++) {
@@ -21,6 +27,11 @@ public class ParkourLevels {
         }
     }
 
+    /**
+     * Получить уровень по id (УСЛОВНОМУ)
+     * @param id ID (порядок в json-фалйе)
+     * @return Паркур-уровень
+     */
     public static ParkourLevel getLevelById(int id) {
         return parkourLevels.get(id);
     }

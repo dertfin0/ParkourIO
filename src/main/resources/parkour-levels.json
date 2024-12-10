@@ -9,6 +9,7 @@
       "yaw" : 0,
       "pitch" : 0
     },
+    "fall-level" : 0,
     "reward" : 10,
     "icon-item" : {
       "name" : "<green>Название уровня</green>",

@@ -7,7 +7,6 @@ import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.generator.ChunkGenerator;
 import org.incendo.cloud.Command;
 import org.incendo.cloud.bukkit.parser.WorldParser;
 import org.incendo.cloud.context.CommandContext;
@@ -18,8 +17,9 @@ import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.EmptyChunkGenerator;
 
-import java.io.File;
-
+/**
+ * Команда для работы с мирами (создание/тп/загрузка)
+ */
 public class WorldCommand implements CloudCommand {
     @Override
     public void register(LegacyPaperCommandManager<CommandSender> manager) {

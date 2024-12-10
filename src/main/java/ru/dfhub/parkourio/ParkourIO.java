@@ -12,6 +12,9 @@ import ru.dfhub.parkourio.util.Config;
 
 import static org.bukkit.Bukkit.getPluginManager;
 
+/**
+ * Основной класс плагина
+ */
 public final class ParkourIO extends JavaPlugin {
 
     private static ParkourIO instance;
@@ -43,16 +46,28 @@ public final class ParkourIO extends JavaPlugin {
     public void onDisable() {
     }
 
+    /**
+     * Получить экземпляр класса плагина
+     * @return ParkourIO Plugin
+     */
     public static ParkourIO getInstance() {
         return instance;
     }
 
+    /**
+     * Зарегистрировать мнонежство ивентов (слушателей)
+     * @param listeners Экземпляры Listener
+     */
     private void registerEvents(Listener ...listeners) {
         for (Listener listener : listeners) {
             getPluginManager().registerEvents(listener, this);
         }
     }
 
+    /**
+     * Зарагистрировать множество Cloud-команд
+     * @param commands Cloud-команды
+     */
     private void registerCommands(CloudCommand ...commands) {
         for (CloudCommand command : commands) {
             command.register(manager);

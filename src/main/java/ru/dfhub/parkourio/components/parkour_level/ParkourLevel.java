@@ -10,16 +10,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.json.JSONObject;
 
+/**
+ * Уровень с паркуром. Содержит всю информаци о уровне
+ */
 public class ParkourLevel {
 
     private final int id;
     private final Location spawn;
     private final int reward;
     private final ItemStack icon;
+    private final int fallLevel;
 
     public ParkourLevel(JSONObject object) {
         id = object.getInt("id");
         reward = object.optInt("reward", 0);
+        fallLevel = object.getInt("fall_level");
 
         JSONObject spawnJson = object.getJSONObject("spawn");
         spawn = new Location(
@@ -73,5 +78,9 @@ public class ParkourLevel {
 
     public ItemStack getIcon() {
         return icon;
+    }
+
+    public int getFallLevel() {
+        return fallLevel;
     }
 }

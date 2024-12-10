@@ -8,6 +8,9 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
+/**
+ * Комадна для перезагрузки кастомных компонентов плагина
+ */
 public class PReloadCommand implements CloudCommand {
 
     public void register(LegacyPaperCommandManager<CommandSender> manager) {

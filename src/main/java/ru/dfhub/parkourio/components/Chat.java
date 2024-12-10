@@ -18,10 +18,16 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
+/**
+ * Слушатель событий, отвечающий за формат чата, цензур-фильтр и др
+ */
 public class Chat implements Listener {
 
     private final String[] censoredWords = getCensoredWords();
 
+    /**
+     * Изменение формата чата
+     */
     @EventHandler(priority = EventPriority.NORMAL)
     public void onMessageSent(AsyncChatEvent e) {
         Component newMessage = MiniMessage.miniMessage().deserialize(
@@ -34,6 +40,9 @@ public class Chat implements Listener {
         e.renderer((source, sourceDisplayName, message1, viewer) -> newMessage);
     }
 
+    /**
+     * Удаление восклицательных знаков в начале сообщения
+     */
     @EventHandler(priority = EventPriority.LOW)
     public void onMessageWithExclamationSymbol(AsyncChatEvent e) {
         String text = ((TextComponent) e.message()).content();
@@ -50,6 +59,9 @@ public class Chat implements Listener {
         }, 2); // Run after 0.1 second (2 ticks)
     }
 
+    /**
+     * Предотвращение отправки сообщений с цензурными словами
+     */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onMessageCensored(AsyncChatEvent e) {
         String rawText = getRawMessage(((TextComponent) e.message()).content());
@@ -96,6 +108,11 @@ public class Chat implements Listener {
         }
     }
 
+    /**
+     * Получить сообщение без спец-символов
+     * @param originalMessage Оригинальное сообщение
+     * @return Сообщение без спец-символов
+     */
     private String getRawMessage(String originalMessage) {
         String symbols = "!@#$%^&*()_+={}[]\"':;<>.,?/|\\`~ ";
         String rawMessage = originalMessage;
@@ -105,6 +122,10 @@ public class Chat implements Listener {
         return rawMessage;
     }
 
+    /**
+     * Проиграть игроку звук о плохом действии
+     * @param player Игрок
+     */
     private void playBadSound(Player player) {
         player.playSound(
                 player.getLocation(),

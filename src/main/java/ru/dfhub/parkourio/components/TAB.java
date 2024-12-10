@@ -10,13 +10,24 @@ import ru.dfhub.parkourio.util.Config;
 
 import java.util.List;
 
+/**
+ * Слушатель ивентов, отвечающий за таб (список игроков)
+ */
 public class TAB implements Listener {
 
+    /**
+     * Основное событие, при котором перезагружается таб
+     * @param e
+     */
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Bukkit.getServer().sendPlayerListHeaderAndFooter(getHeader(), getFooter());
-    }
+    } // Висит на PlayerJoin тк не отображает инфо о тпс/онлайне
 
+    /**
+     * Получить хедер из конфига
+     * @return Хедер в формате Kyori Component
+     */
     private Component getHeader() {
         Component header = Component.empty();
         List<String> lines = Config.getStringList(Config.getConfig().getJSONObject("tab").getJSONArray("header"));
@@ -26,6 +37,10 @@ public class TAB implements Listener {
         return header;
     }
 
+    /**
+     * Получить футер из конфига
+     * @return Футер в формате Kyori Component
+     */
     private Component getFooter() {
         Component footer = Component.empty();
         List<String> lines = Config.getStringList(Config.getConfig().getJSONObject("tab").getJSONArray("footer"));
