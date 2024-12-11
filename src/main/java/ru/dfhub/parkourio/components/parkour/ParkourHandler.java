@@ -49,12 +49,6 @@ public class ParkourHandler implements Listener {
         }
     }
 
-    @EventHandler
-    public void onDamage(EntityDamageEvent e) {
-        if (e.getEntity().getType() != EntityType.PLAYER) return;
-        e.setCancelled(true);
-    }
-
     private void handleStart(Player p) {
         if (!checkCooldown(p)) return;
         p.setMetadata(Metadata.STARTED_AT.value(), new FixedMetadataValue(ParkourIO.getInstance(), System.currentTimeMillis()));

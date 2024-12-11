@@ -39,7 +39,8 @@ public final class ParkourIO extends JavaPlugin {
                 new JoinLeaveMessages(),
                 new Chat(),
                 new TAB(),
-                new ParkourHandler()
+                new ParkourHandler(),
+                new DisableDamage()
         );
         registerCommands(
                 new PReloadCommand(),
