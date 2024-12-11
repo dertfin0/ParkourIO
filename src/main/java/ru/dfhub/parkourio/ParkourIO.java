@@ -40,7 +40,8 @@ public final class ParkourIO extends JavaPlugin {
         );
         registerCommands(
                 new PReloadCommand(),
-                new WorldCommand()
+                new WorldCommand(),
+                new MetadataUtilCommand()
         );
     }
 
