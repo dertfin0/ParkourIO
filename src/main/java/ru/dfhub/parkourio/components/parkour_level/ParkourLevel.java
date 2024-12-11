@@ -42,7 +42,7 @@ public class ParkourLevel {
 
     private ItemStack getIcon(JSONObject iconItemJson) {
         ItemStack icon = new ItemStack(
-                Material.getMaterial(iconItemJson.optString("material", "STONE")),
+                Material.getMaterial(iconItemJson.optString("material", "STONE").toUpperCase()),
                 iconItemJson.optInt("amount", 1)
         );
         ItemMeta iconMeta = icon.getItemMeta();
