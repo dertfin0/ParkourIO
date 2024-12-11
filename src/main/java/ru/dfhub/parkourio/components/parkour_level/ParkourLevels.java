@@ -24,6 +24,7 @@ public class ParkourLevels {
         JSONArray levelsJson = new JSONArray(readLevelsFile());
         for (int i = 0; i < levelsJson.length(); i++) {
             Bukkit.getLogger().log(Level.INFO, "Loading %s parkour-level".formatted(i));
+            parkourLevels.clear();
             parkourLevels.add(new ParkourLevel(levelsJson.getJSONObject(i)));
         }
     }
@@ -34,7 +35,11 @@ public class ParkourLevels {
      * @return Паркур-уровень
      */
     public static ParkourLevel getLevelById(int id) {
-        return parkourLevels.get(id);
+        try {
+            return parkourLevels.get(id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
