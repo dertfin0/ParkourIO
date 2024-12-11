@@ -6,10 +6,13 @@
 На данный момент для запуска плагина, необходимо в папке Plugins вручную создать папку `ParkourIO` и разместить в ней `config.json` и `parkour-levels.json`
 
 ## Пермишены
-Все пермишены, как и метадаты (о них позже), начинаются с имени пакета - `ru.dfhub.parkourio`
+Все пермишены, как и метадаты (о них позже), начинаются с имени пакета - `ru.dfhub.parkourio` и `command`
 
 `ru.dfhub.parkourio.command.reload` - Команда /reload
 `ru.dfhub.parkourio.command.world` - Команда /world
+`ru.dfhub.parkourio.command.metadata-util` - Команда /metadata-util
+`ru.dfhub.parkourio.command.parkour` - Команда /parkour
+`ru.dfhub.parkourio.command.spawn` - Команда /spawn
 
 ## Основные моменты 
 Каждый заход игрока на сервер подразумевает:
