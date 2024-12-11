@@ -21,6 +21,7 @@ public class ParkourLevel {
     private final int reward;
     private final ItemStack icon;
     private final int fallLevel;
+    private final JSONObject start, end;
 
     public ParkourLevel(JSONObject object) {
         id = object.getInt("id");
@@ -37,6 +38,8 @@ public class ParkourLevel {
                 spawnJson.optFloat("yaw", 0f),
                 spawnJson.optFloat("pitch", 0f)
         );
+        start = object.getJSONObject("start");
+        end = object.getJSONObject("end");
         icon = getIcon(object.getJSONObject("icon-item"));
     }
 
@@ -88,5 +91,25 @@ public class ParkourLevel {
 
     public int getFallLevel() {
         return fallLevel;
+    }
+
+    public JSONObject getStart() {
+        return start;
+    }
+
+    public boolean isStart(Location location) {
+        return (int) location.getX() == start.getInt("x") &&
+                (int) location.getY() == start.getInt("y") &&
+                (int) location.getZ() == start.getInt("z");
+    }
+
+    public JSONObject getEnd() {
+        return end;
+    }
+
+    public boolean isEnd(Location location) {
+        return (int) location.getX() == end.getInt("x") &&
+                (int) location.getY() == end.getInt("y") &&
+                (int) location.getZ() == end.getInt("z");
     }
 }

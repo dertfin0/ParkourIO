@@ -1,7 +1,9 @@
 package ru.dfhub.parkourio.util;
 
 public enum Metadata {
-    ON_PARKOUR_LEVEL("ru.dfhub.parkourio.parkour.on_parkour_level");
+    ON_PARKOUR_LEVEL("ru.dfhub.parkourio.parkour.on_parkour_level"),
+    STARTED_AT("ru.dfhub.parkourio.parkour.started_at")
+    ;
 
     private final String value;
 

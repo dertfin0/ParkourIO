@@ -7,6 +7,7 @@ import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.parkour.ParkourCommand;
+import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.spawn.SpawnOnJoin;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -37,7 +38,8 @@ public final class ParkourIO extends JavaPlugin {
                 new SpawnOnJoin(),
                 new JoinLeaveMessages(),
                 new Chat(),
-                new TAB()
+                new TAB(),
+                new ParkourHandler()
         );
         registerCommands(
                 new PReloadCommand(),

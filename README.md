@@ -31,6 +31,16 @@
       "pitch" : 0
     },
     "fall-level" : 0,
+    "start" : {
+      "x" : 0,
+      "y" : 0,
+      "z" : 0
+    },
+    "end" : {
+      "x" : 1,
+      "y" : 1,
+      "z" : 1
+    },
     "reward" : 10,
     "icon-item" : {
       "name" : "<green>Название уровня</green>",
@@ -38,7 +48,7 @@
         "<gray>Жесть, лооооооор</gray>",
         "Сколько угодно строк, только бы в экран поместилось"
       ],
-      "material" : "red_wool",
+      "material" : "RED_WOOL",
       "amount" : 1,
       "enchanted" : true
     }
