@@ -17,7 +17,7 @@
         "<gray>Жесть, лооооооор</gray>",
         "Сколько угодно строк, только бы в экран поместилось"
       ],
-      "material" : "red_wool",
+      "material" : "RED_WOOL",
       "amount" : 1,
       "enchanted" : true
     }

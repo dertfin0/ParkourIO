@@ -25,7 +25,7 @@ public class ParkourLevel {
     public ParkourLevel(JSONObject object) {
         id = object.getInt("id");
         reward = object.optInt("reward", 0);
-        fallLevel = object.getInt("fall_level");
+        fallLevel = object.getInt("fall-level");
 
         JSONObject spawnJson = object.getJSONObject("spawn");
         createWorld(spawnJson.getString("world")); // Загрузка мира для дальнейшей работы
