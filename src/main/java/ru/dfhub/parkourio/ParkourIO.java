@@ -46,7 +46,8 @@ public final class ParkourIO extends JavaPlugin {
                 new PReloadCommand(),
                 new WorldCommand(),
                 new MetadataUtilCommand(),
-                new ParkourCommand()
+                new ParkourCommand(),
+                new SpawnCommand()
         );
     }
 

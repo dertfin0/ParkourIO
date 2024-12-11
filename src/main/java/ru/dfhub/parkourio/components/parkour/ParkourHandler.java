@@ -65,7 +65,7 @@ public class ParkourHandler implements Listener {
         int seconds = (int) (time / 1000);
         int ms = (int) (time - seconds * 1000);
         p.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Вы закончили паркур за <aqua>%s.%sms</aqua>!</green>"
+                "<green>Вы закончили паркур за <aqua>%s.%ss</aqua>!</green>"
                         .formatted(seconds, String.valueOf(ms).substring(0, 2))
         ));
 
