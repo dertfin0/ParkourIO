@@ -13,6 +13,7 @@ import org.bukkit.metadata.FixedMetadataValue;
 import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.Metadata;
+import ru.dfhub.parkourio.util.TimeUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -61,12 +62,10 @@ public class ParkourHandler implements Listener {
         if (!p.hasMetadata(Metadata.STARTED_AT.value())) return;
         if (!checkCooldown(p)) return;
 
-        long time = System.currentTimeMillis() - p.getMetadata(Metadata.STARTED_AT.value()).getFirst().asLong();
-        int seconds = (int) (time / 1000);
-        int ms = (int) (time - seconds * 1000);
         p.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Вы закончили паркур за <aqua>%s.%ss</aqua>!</green>"
-                        .formatted(seconds, String.valueOf(ms).substring(0, 2))
+                "<green>Вы закончили паркур за <aqua>%s</aqua>!</green>".formatted(
+                        TimeUtil.formatTime(System.currentTimeMillis() - p.getMetadata(Metadata.STARTED_AT.value()).getFirst().asLong())
+                )
         ));
 
         p.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
