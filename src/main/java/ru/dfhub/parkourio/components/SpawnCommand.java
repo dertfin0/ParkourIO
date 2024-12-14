@@ -28,6 +28,7 @@ public class SpawnCommand implements CloudCommand {
 
         player.removeMetadata(Metadata.ON_PARKOUR_LEVEL.value(), ParkourIO.getInstance());
         player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
 
         player.teleport(getSpawnLocation());
     }

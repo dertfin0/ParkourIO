@@ -11,6 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Уровень с паркуром. Содержит всю информаци о уровне
  */
@@ -22,6 +25,7 @@ public class ParkourLevel {
     private final ItemStack icon;
     private final int fallLevel;
     private final JSONObject start, end;
+    private final List<JSONObject> checkpoints = new ArrayList<>();
 
     public ParkourLevel(JSONObject object) {
         id = object.getInt("id");
@@ -38,9 +42,12 @@ public class ParkourLevel {
                 spawnJson.optFloat("yaw", 0f),
                 spawnJson.optFloat("pitch", 0f)
         );
+        icon = getIcon(object.getJSONObject("icon-item"));
         start = object.getJSONObject("start");
         end = object.getJSONObject("end");
-        icon = getIcon(object.getJSONObject("icon-item"));
+        for (int i = 0; i < object.getJSONArray("checkpoints").length(); i++) {
+            checkpoints.add(object.getJSONArray("checkpoints").getJSONObject(i));
+        }
     }
 
     private ItemStack getIcon(JSONObject iconItemJson) {
@@ -111,5 +118,43 @@ public class ParkourLevel {
         return (int) location.getX() == end.getInt("x") &&
                 (int) location.getY() == end.getInt("y") &&
                 (int) location.getZ() == end.getInt("z");
+    }
+
+    public List<JSONObject> getCheckpoints() {
+        return checkpoints;
+    }
+
+
+    /**
+     * Узнать, является ли Location чекпоинтом и получить его id
+     * @param location Location
+     * @return ID чекпоинта или -1, если такой чекпоинт не найден
+     */
+    public int isCheckpoint(Location location) {
+        int x = (int) location.getX();
+        int y = (int) location.getY();
+        int z = (int) location.getZ();
+        for (int i = 0; i < checkpoints.size(); i++) {
+            if (
+                    x == checkpoints.get(i).getInt("x") &&
+                    y == checkpoints.get(i).getInt("y") &&
+                    z == checkpoints.get(i).getInt("z")
+            ) return i;
+        }
+        return -1;
+    }
+
+    public Location getCheckpointById(int id) {
+        if (id == -1) return spawn;
+        if (id > checkpoints.size() - 1) return spawn;
+
+        return new Location(
+                Bukkit.getWorld(checkpoints.get(id).getString("world")),
+                checkpoints.get(id).getDouble("x"),
+                checkpoints.get(id).getDouble("y"),
+                checkpoints.get(id).getDouble("z"),
+                checkpoints.get(id).getFloat("yaw"),
+                checkpoints.get(id).getFloat("pitch")
+        );
     }
 }

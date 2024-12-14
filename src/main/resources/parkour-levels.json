@@ -20,6 +20,16 @@
       "y" : 1,
       "z" : 1
     },
+    "checkpoints" : [
+      {
+        "world" : "world",
+        "x" : 2.5,
+        "y" : 2.5,
+        "z" : 2.5,
+        "yaw" : 0,
+        "pitch": 0
+      }
+    ],
     "reward" : 10,
     "icon-item" : {
       "name" : "<green>Название уровня</green>",
