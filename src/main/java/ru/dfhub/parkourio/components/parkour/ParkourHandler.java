@@ -99,6 +99,8 @@ public class ParkourHandler implements Listener {
     private void handleCheckpointReach(Player p, int id, boolean noMessage) {
         if (!checkCooldown(p)) return;
 
+        if (p.getMetadata(Metadata.CHECKPOINT.value()).getFirst().asInt() == id) return;
+
         p.setMetadata(Metadata.CHECKPOINT.value(), new FixedMetadataValue(ParkourIO.getInstance(), id));
 
         if (noMessage) return;
