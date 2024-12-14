@@ -11,7 +11,8 @@
     "y" : 0.5,
     "z" : 0.5,
     "yaw" : 0,
-    "pitch" : 90
+    "pitch" : 90,
+    "fall-level" : -10
   },
   "join-leave-messages" : {
     "join-message" : "<color:#801fdb>[<green>+</green>]</color> <gradient:#f0d9ff:#f1d6ff>%player%</gradient> <gradient:#a03bff:#c233ff>зашел!</gradient>",

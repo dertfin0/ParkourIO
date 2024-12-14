@@ -6,14 +6,24 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.json.JSONObject;
 import ru.dfhub.parkourio.util.Config;
 
-public class SpawnOnJoin implements Listener {
+public class SpawnHandler implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent e) {
         e.getPlayer().teleport(getSpawnLocation());
+    }
+
+    @EventHandler
+    public void onFall(PlayerMoveEvent e) {
+        if (!e.getTo().getWorld().getName().equalsIgnoreCase(Config.getConfig().getJSONObject("spawn-location").getString("world"))) return;
+
+        if (e.getTo().getBlockY() <= Config.getConfig().getJSONObject("spawn-location").getInt("fall-level")) {
+            e.getPlayer().teleport(getSpawnLocation());
+        }
     }
 
     private Location getSpawnLocation() {

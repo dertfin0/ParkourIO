@@ -11,12 +11,11 @@ import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
-import ru.dfhub.parkourio.components.spawn.SpawnOnJoin;
+import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
 import static org.bukkit.Bukkit.getPluginManager;
-import static org.bukkit.Bukkit.getWorldContainer;
 
 /**
  * Основной класс плагина
@@ -38,7 +37,7 @@ public final class ParkourIO extends JavaPlugin {
         ParkourLevels.reload();
         registerEvents(
                 new MOTD(),
-                new SpawnOnJoin(),
+                new SpawnHandler(),
                 new JoinLeaveMessages(),
                 new Chat(),
                 new TAB(),
