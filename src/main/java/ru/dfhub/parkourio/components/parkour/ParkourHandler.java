@@ -62,7 +62,7 @@ public class ParkourHandler implements Listener {
         p.sendMessage(MiniMessage.miniMessage().deserialize(
                 "<green>Вы начали паркур!</green>"
         ));
-        handleCheckpointReach(p, -1,true);
+        setCheckpoint(p, -1); // Spawn checkpoint
     }
 
     private void handleEnd(Player p) {
@@ -75,7 +75,7 @@ public class ParkourHandler implements Listener {
                 )
         ));
 
-        p.setMetadata(Metadata.CHECKPOINT.value(), new FixedMetadataValue(ParkourIO.getInstance(), -1));
+        setCheckpoint(p, -1); // Spawn checkpoint
         p.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
     }
 
@@ -101,7 +101,7 @@ public class ParkourHandler implements Listener {
 
         if (p.getMetadata(Metadata.CHECKPOINT.value()).getFirst().asInt() == id) return;
 
-        p.setMetadata(Metadata.CHECKPOINT.value(), new FixedMetadataValue(ParkourIO.getInstance(), id));
+        setCheckpoint(p, id);
 
         if (noMessage) return;
         p.sendMessage(MiniMessage.miniMessage().deserialize(
@@ -121,5 +121,9 @@ public class ParkourHandler implements Listener {
             return true;
         }
         return false;
+    }
+
+    public void setCheckpoint(Player player, int id) {
+        player.setMetadata(Metadata.CHECKPOINT.value(), new FixedMetadataValue(ParkourIO.getInstance(), id));
     }
 }
