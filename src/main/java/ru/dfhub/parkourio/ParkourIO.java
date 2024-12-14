@@ -1,5 +1,7 @@
 package ru.dfhub.parkourio;
 
+import org.bukkit.Bukkit;
+import org.bukkit.WorldCreator;
 import org.bukkit.command.CommandSender;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -14,6 +16,7 @@ import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
 import static org.bukkit.Bukkit.getPluginManager;
+import static org.bukkit.Bukkit.getWorldContainer;
 
 /**
  * Основной класс плагина
@@ -49,6 +52,7 @@ public final class ParkourIO extends JavaPlugin {
                 new ParkourCommand(),
                 new SpawnCommand()
         );
+        registerSpawnWorld();
     }
 
     @Override
@@ -81,5 +85,14 @@ public final class ParkourIO extends JavaPlugin {
         for (CloudCommand command : commands) {
             command.register(manager);
         }
+    }
+
+    /**
+     * Зарегистрировать мир спавна
+     */
+    private void registerSpawnWorld() {
+        Bukkit.createWorld(new WorldCreator(
+                Config.getConfig().getJSONObject("spawn-location").getString("world")
+        ));
     }
 }
