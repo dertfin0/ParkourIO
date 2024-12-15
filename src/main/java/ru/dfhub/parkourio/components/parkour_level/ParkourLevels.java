@@ -1,7 +1,6 @@
 package ru.dfhub.parkourio.components.parkour_level;
 
 import org.bukkit.Bukkit;
-import org.bukkit.WorldCreator;
 import org.json.JSONArray;
 
 import java.nio.file.Files;

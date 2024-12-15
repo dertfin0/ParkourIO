@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.WorldCreator;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -136,10 +135,11 @@ public class ParkourLevel {
         int y = (int) location.getY();
         int z = (int) location.getZ();
         for (int i = 0; i < checkpoints.size(); i++) {
+            JSONObject checkpoint = checkpoints.get(id);
             if (
-                    x == checkpoints.get(i).getInt("x") &&
-                    y == checkpoints.get(i).getInt("y") &&
-                    z == checkpoints.get(i).getInt("z")
+                    x == checkpoint.getInt("x") &&
+                    y == checkpoint.getInt("y") &&
+                    z == checkpoint.getInt("z")
             ) return i;
         }
         return -1;
@@ -149,13 +149,15 @@ public class ParkourLevel {
         if (id == -1) return spawn;
         if (id > checkpoints.size() - 1) return spawn;
 
+
+        JSONObject checkpoint = checkpoints.get(id);
         return new Location(
-                Bukkit.getWorld(checkpoints.get(id).getString("world")),
-                checkpoints.get(id).getDouble("x"),
-                checkpoints.get(id).getDouble("y"),
-                checkpoints.get(id).getDouble("z"),
-                checkpoints.get(id).getFloat("yaw"),
-                checkpoints.get(id).getFloat("pitch")
+                Bukkit.getWorld(checkpoint.getString("world")),
+                checkpoint.getDouble("x"),
+                checkpoint.getDouble("y"),
+                checkpoint.getDouble("z"),
+                checkpoint.getFloat("yaw"),
+                checkpoint.getFloat("pitch")
         );
     }
 }

@@ -9,7 +9,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.json.JSONObject;
 import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.Metadata;
@@ -59,9 +58,10 @@ public class ParkourHandler implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        e.getPlayer().removeMetadata(Metadata.ON_PARKOUR_LEVEL.value(), ParkourIO.getInstance());
-        e.getPlayer().removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
-        e.getPlayer().removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
+        Player player = e.getPlayer();
+        player.removeMetadata(Metadata.ON_PARKOUR_LEVEL.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
     }
 
     private void handleStart(Player p) {
