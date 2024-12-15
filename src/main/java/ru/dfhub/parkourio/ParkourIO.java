@@ -52,6 +52,7 @@ public final class ParkourIO extends JavaPlugin {
                 new SpawnCommand()
         );
         registerSpawnWorld();
+        ru.dfhub.DFPaperLib.enable();
     }
 
     @Override
