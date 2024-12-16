@@ -9,6 +9,7 @@ import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.IntegerParser;
 import ru.dfhub.parkourio.ParkourIO;
+import ru.dfhub.parkourio.components.SpawnCommand;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevel;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -23,6 +24,10 @@ public class ParkourCommand implements CloudCommand {
                 .literal("tp")
                 .required("id", IntegerParser.integerParser(0, ParkourLevels.getLevels().size() - 1))
                 .handler(this::handleTeleport)
+        );
+        manager.command(builder
+                .literal("leave")
+                .handler(new SpawnCommand()::handle)
         );
     }
 
