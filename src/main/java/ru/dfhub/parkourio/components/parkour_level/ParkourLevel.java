@@ -46,7 +46,7 @@ public class ParkourLevel {
         start = object.getJSONObject("start");
         end = object.getJSONObject("end");
         for (int i = 0; i < object.getJSONArray("checkpoints").length(); i++) {
-            checkpoints.add(object.getJSONArray("checkpoints").getJSONObject(i));
+            checkpoints.addLast(object.getJSONArray("checkpoints").getJSONObject(i));
         }
     }
 
@@ -135,7 +135,7 @@ public class ParkourLevel {
         int y = (int) location.getY();
         int z = (int) location.getZ();
         for (int i = 0; i < checkpoints.size(); i++) {
-            JSONObject checkpoint = checkpoints.get(id);
+            JSONObject checkpoint = checkpoints.get(i);
             if (
                     x == checkpoint.getInt("x") &&
                     y == checkpoint.getInt("y") &&
