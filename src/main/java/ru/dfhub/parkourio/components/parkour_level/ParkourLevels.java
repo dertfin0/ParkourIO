@@ -20,12 +20,13 @@ public class ParkourLevels {
      * Перезагрузить список уровней
      */
     public static void reload() {
+        parkourLevels.clear();
         JSONArray levelsJson = new JSONArray(readLevelsFile());
         for (int i = 0; i < levelsJson.length(); i++) {
             Bukkit.getLogger().log(Level.INFO, "Loading %s parkour-level".formatted(i));
-            parkourLevels.clear();
-            parkourLevels.add(new ParkourLevel(levelsJson.getJSONObject(i)));
+            parkourLevels.addLast(new ParkourLevel(levelsJson.getJSONObject(i)));
         }
+        Bukkit.getLogger().log(Level.INFO, "Loaded %s parkour-levels".formatted(parkourLevels.size()));
     }
 
     /**

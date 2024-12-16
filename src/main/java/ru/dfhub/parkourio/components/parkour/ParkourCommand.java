@@ -39,7 +39,7 @@ public class ParkourCommand implements CloudCommand {
     private void handleTeleport(CommandContext<CommandSender> ctx) {
         if (!(ctx.sender() instanceof Player player)) return;
 
-        ParkourLevel level = ParkourLevels.getLevelById(ctx.get("id"));
+        ParkourLevel level = ParkourLevels.getLevelById(ctx.getOrDefault("id", 9999999));
         if (level == null) {
             ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
                     "<red>Уровень не найден!</red>"
