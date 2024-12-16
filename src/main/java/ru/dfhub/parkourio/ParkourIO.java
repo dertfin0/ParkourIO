@@ -42,7 +42,8 @@ public final class ParkourIO extends JavaPlugin {
                 new Chat(),
                 new TAB(),
                 new ParkourHandler(),
-                new DisableDamage()
+                new DisableDamage(),
+                new DisableBlockGrow()
         );
         registerCommands(
                 new PReloadCommand(),
