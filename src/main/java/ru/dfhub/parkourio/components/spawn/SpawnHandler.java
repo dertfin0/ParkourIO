@@ -5,6 +5,8 @@ import org.bukkit.Location;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.json.JSONObject;
@@ -24,6 +26,16 @@ public class SpawnHandler implements Listener {
         if (e.getTo().getBlockY() <= Config.getConfig().getJSONObject("spawn-location").getInt("fall-level")) {
             e.getPlayer().teleport(getSpawnLocation());
         }
+    }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent e) {
+        if (!e.getPlayer().hasPermission("ru.dfhub.parkourio.spawn.build")) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent e) {
+        if (!e.getPlayer().hasPermission("ru.dfhub.parkourio.spawn.build")) e.setCancelled(true);
     }
 
     private Location getSpawnLocation() {
