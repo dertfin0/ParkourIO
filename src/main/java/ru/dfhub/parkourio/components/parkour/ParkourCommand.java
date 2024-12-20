@@ -47,6 +47,11 @@ public class ParkourCommand implements CloudCommand {
             return;
         }
 
+        // If teleport user from other parkour level
+        player.removeMetadata(Metadata.ON_PARKOUR_LEVEL.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
+
         player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), ctx.get("id")));
         player.teleport(level.getSpawn());
     }
