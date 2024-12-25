@@ -31,5 +31,21 @@
     ],
     "footer" : [
     ]
-  }
+  },
+  "spawn-items" : [
+    {
+      "slot" : 0,
+      "item" : {
+        "material" : "Ender Pearl",
+        "amount" : 1,
+
+        "name" : "<purple>Test Item</purple",
+        "lore" : [
+          "<dark_gray>Тестовый предмет для спавна</dark_gray>",
+          "<dark_gray><i>он просто существует...</i></dark_gray>"
+        ],
+        "enchanted" : false
+      }
+    }
+  ]
 }

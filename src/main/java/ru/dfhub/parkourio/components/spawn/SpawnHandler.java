@@ -2,6 +2,7 @@ package ru.dfhub.parkourio.components.spawn;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -16,7 +17,7 @@ public class SpawnHandler implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST)
     public void onJoin(PlayerJoinEvent e) {
-        e.getPlayer().teleport(getSpawnLocation());
+        handleTeleport(e.getPlayer());
     }
 
     @EventHandler
@@ -38,7 +39,12 @@ public class SpawnHandler implements Listener {
         if (!e.getPlayer().hasPermission("ru.dfhub.parkourio.spawn.build")) e.setCancelled(true);
     }
 
-    private Location getSpawnLocation() {
+    public static void handleTeleport(Player player) {
+        player.teleport(getSpawnLocation());
+        SpawnItems.give(player);
+    }
+
+    private static Location getSpawnLocation() {
         JSONObject data = Config.getConfig().getJSONObject("spawn-location");
         return new Location(
                 Bukkit.getWorld(data.optString("world", "world")),

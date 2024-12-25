@@ -8,6 +8,7 @@ import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.json.JSONObject;
 import ru.dfhub.parkourio.ParkourIO;
+import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 import ru.dfhub.parkourio.util.Metadata;
@@ -30,9 +31,13 @@ public class SpawnCommand implements CloudCommand {
         player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
         player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
 
-        player.teleport(getSpawnLocation());
+        SpawnHandler.handleTeleport(player);
     }
 
+    @Deprecated
+    /**
+     * @deprecated Больше не используется
+     */
     private Location getSpawnLocation() {
         JSONObject data = Config.getConfig().getJSONObject("spawn-location");
         return new Location(
