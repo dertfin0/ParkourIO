@@ -30,7 +30,7 @@ public class IconItems {
         );
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemMeta.displayName(miniMessage().deserialize(json.optString("name", " ")));
+        itemMeta.displayName(miniMessage().deserialize("<!i>" + json.optString("name", " ")));
         itemMeta.lore(getLore(json.getJSONArray("lore")));
         if (json.optBoolean("enchanted", false)) {
             itemMeta.addEnchant(Enchantment.KNOCKBACK, 1, false);
@@ -58,7 +58,7 @@ public class IconItems {
         );
         ItemMeta itemMeta = itemStack.getItemMeta();
 
-        itemMeta.displayName(miniMessage().deserialize(Optional.of(name).orElse(" ")));
+        itemMeta.displayName(miniMessage().deserialize("<!i>" + Optional.of(name).orElse(" ")));
         itemMeta.lore(getLore(lore));
         if (Optional.of(enchanted).orElse(false)) {
             itemMeta.addEnchant(Enchantment.KNOCKBACK, 1, false);
