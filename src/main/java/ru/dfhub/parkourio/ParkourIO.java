@@ -43,7 +43,8 @@ public final class ParkourIO extends JavaPlugin {
                 new TAB(),
                 new ParkourHandler(),
                 new DisableDamage(),
-                new DisableBlockGrow()
+                new DisableBlockGrow(),
+                new InventoryPrevent()
         );
         registerCommands(
                 new PReloadCommand(),
