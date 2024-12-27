@@ -39,10 +39,23 @@
         "material" : "Ender Pearl",
         "amount" : 1,
 
-        "name" : "<purple>Test Item</purple",
+        "name" : "<green>Test Item</green>",
         "lore" : [
           "<dark_gray>Тестовый предмет для спавна</dark_gray>",
           "<dark_gray><i>он просто существует...</i></dark_gray>"
+        ],
+        "enchanted" : false
+      }
+    },
+    {
+      "slot" : 8,
+      "item" : {
+        "material" : "paper",
+        "amount" : 1,
+
+        "name" : "<green><b>О сервере</b></green>",
+        "lore" : [
+          "<!i><gray>Нажмите, чтобы узнать информацию о сервере</gray>"
         ],
         "enchanted" : false
       }
