@@ -42,11 +42,12 @@ public class MenuFormatter {
         return format.get(items);
     }
 
-    public static Inventory getFormattedInventory(List<ItemStack> items) {
+    @SuppressWarnings("deprecation")
+    public static Inventory getFormattedInventory(List<ItemStack> items, String title) {
         Iterator<Integer> menuFormat = format.get(items.size()).iterator();
 
         boolean isAmplified = items.size() > 27;
-        Inventory inventory = Bukkit.createInventory(null, isAmplified ? 45 : 27);
+        Inventory inventory = Bukkit.createInventory(null, isAmplified ? 45 : 27, title);
 
         if (items.size() > 17) {
             inventory.setContents(items.toArray(ItemStack[]::new));
