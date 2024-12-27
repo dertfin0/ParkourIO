@@ -52,7 +52,6 @@ public class AboutMenu {
             PlainTextComponentSerializer serializer = PlainTextComponentSerializer.builder().build();
             if (serializer.serialize(item.displayName()).equals("[О сервере]")) {
                 e.getPlayer().openInventory(new AboutMenu().getInventory());
-                e.getPlayer().setMetadata(Metadata.ABOUT_MENU.value(), new FixedMetadataValue(ParkourIO.getInstance(), true));
             }
         }
     }

@@ -10,8 +10,11 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.json.JSONObject;
+import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.util.Config;
+import ru.dfhub.parkourio.util.Metadata;
 
 public class SpawnHandler implements Listener {
 
@@ -42,6 +45,8 @@ public class SpawnHandler implements Listener {
     public static void handleTeleport(Player player) {
         player.teleport(getSpawnLocation());
         SpawnItems.give(player);
+
+        if (Config.getConfig().optInt("spawn-parkour-level", -1) != -1) player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), Config.getConfig().getInt("spawn-parkour-level")));
     }
 
     private static Location getSpawnLocation() {
