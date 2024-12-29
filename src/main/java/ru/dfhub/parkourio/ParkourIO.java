@@ -16,6 +16,9 @@ import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import static org.bukkit.Bukkit.getPluginManager;
 
 /**
@@ -57,6 +60,9 @@ public final class ParkourIO extends JavaPlugin {
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
+
+        ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
+        //es.submit(new ParticleManager());
     }
 
     @Override
