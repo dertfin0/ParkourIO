@@ -28,6 +28,7 @@ public final class ParkourIO extends JavaPlugin {
 
     private static ParkourIO instance;
     private static LegacyPaperCommandManager<CommandSender> manager;
+    private static Snow snow;
 
     @Override
     public void onEnable() {
@@ -61,13 +62,15 @@ public final class ParkourIO extends JavaPlugin {
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
 
+        snow = new Snow();
         ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
         //es.submit(new ParticleManager());
-        es.submit(new Snow());
+        es.submit(snow);
     }
 
     @Override
     public void onDisable() {
+        snow.setStopped(true);
     }
 
     /**
