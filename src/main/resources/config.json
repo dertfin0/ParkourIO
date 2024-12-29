@@ -61,5 +61,6 @@
         "enchanted" : false
       }
     }
-  ]
+  ],
+  "enable-snow" : true
 }

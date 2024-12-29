@@ -63,6 +63,7 @@ public final class ParkourIO extends JavaPlugin {
 
         ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
         //es.submit(new ParticleManager());
+        es.submit(new Snow());
     }
 
     @Override
