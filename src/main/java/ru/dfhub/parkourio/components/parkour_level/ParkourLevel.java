@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.json.JSONObject;
+import ru.dfhub.parkourio.util.IconItems;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class ParkourLevel {
                 spawnJson.optFloat("yaw", 0f),
                 spawnJson.optFloat("pitch", 0f)
         );
-        icon = getIcon(object.getJSONObject("icon-item"));
+        icon = IconItems.serialize(object.getJSONObject("icon-item"));
         start = object.getJSONObject("start");
         end = object.getJSONObject("end");
         for (int i = 0; i < object.getJSONArray("checkpoints").length(); i++) {
@@ -50,6 +51,7 @@ public class ParkourLevel {
         }
     }
 
+    @Deprecated
     private ItemStack getIcon(JSONObject iconItemJson) {
         ItemStack icon = new ItemStack(
                 Material.getMaterial(iconItemJson.optString("material", "STONE").toUpperCase()),
