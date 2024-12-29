@@ -4,7 +4,8 @@ public enum Metadata {
     ON_PARKOUR_LEVEL("ru.dfhub.parkourio.parkour.on_parkour_level"),
     STARTED_AT("ru.dfhub.parkourio.parkour.started_at"),
     CHECKPOINT("ru.dfhub.parkourio.parkour.checkpoint"),
-    INVENTORY_PREVENT("ru.dfhub.parkourio.inventory-prevent")
+    INVENTORY_PREVENT("ru.dfhub.parkourio.inventory-prevent"),
+    OPENED_PARKOUR_MENU("ru.dfhub.parkourio.opened-parkour-menu")
     ;
 
     private final String value;

@@ -1,22 +1,16 @@
 package ru.dfhub.parkourio.components.menu;
 
-import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.serializer.plain.PlainComponentSerializer;
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryOpenEvent;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.metadata.FixedMetadataValue;
 import org.json.JSONArray;
-import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.util.Config;
 import ru.dfhub.parkourio.util.IconItems;
 import ru.dfhub.parkourio.util.MenuFormatter;
-import ru.dfhub.parkourio.util.Metadata;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +39,9 @@ public class AboutMenu {
 
     public static class Handler implements Listener {
 
-
         @EventHandler
         public void onInteract(PlayerInteractEvent e) {
+            if (e.getAction() != Action.RIGHT_CLICK_AIR && e.getAction() != Action.RIGHT_CLICK_BLOCK) return;
             if (!(e.getPlayer().getInventory().getItemInMainHand() instanceof ItemStack item)) return;
             PlainTextComponentSerializer serializer = PlainTextComponentSerializer.builder().build();
             if (serializer.serialize(item.displayName()).equals("[О сервере]")) {

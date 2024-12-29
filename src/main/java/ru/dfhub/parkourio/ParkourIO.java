@@ -9,6 +9,7 @@ import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.menu.AboutMenu;
+import ru.dfhub.parkourio.components.menu.ParkourMenu;
 import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
@@ -50,7 +51,8 @@ public final class ParkourIO extends JavaPlugin {
                 new DisableDamage(),
                 new DisableBlockGrow(),
                 new InventoryPrevent(),
-                new AboutMenu.Handler()
+                new AboutMenu.Handler(),
+                new ParkourMenu.Handler()
         );
         registerCommands(
                 new PReloadCommand(),
