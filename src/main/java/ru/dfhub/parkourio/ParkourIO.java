@@ -10,15 +10,13 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.menu.AboutMenu;
 import ru.dfhub.parkourio.components.menu.ParkourMenu;
-import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.ServiceLoader;
 
 import static org.bukkit.Bukkit.getPluginManager;
 
@@ -54,20 +52,20 @@ public final class ParkourIO extends JavaPlugin {
                 new AboutMenu.Handler(),
                 new ParkourMenu.Handler()
         );
-        registerCommands(
-                new PReloadCommand(),
-                new WorldCommand(),
-                new MetadataUtilCommand(),
-                new ParkourCommand(),
-                new SpawnCommand()
-        );
+        ServiceLoader.load(CloudCommand.class).forEach(it -> {
+            getSLF4JLogger().info("Trying to register CloudCommand {}", it.getClass().getSimpleName());
+            try {
+                it.register(manager);
+                getSLF4JLogger().info("Successfully registered {}", it.getClass().getSimpleName());
+            } catch (Exception e) {
+                getSLF4JLogger().error("Error while registering {}: {}", it.getClass().getSimpleName(), e.getMessage());
+            }
+        });
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
 
         snow = new Snow();
-        ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
-        //es.submit(new ParticleManager());
-        es.submit(snow);
+        Thread.ofVirtual().start(snow);
     }
 
     @Override
@@ -90,16 +88,6 @@ public final class ParkourIO extends JavaPlugin {
     private void registerEvents(Listener ...listeners) {
         for (Listener listener : listeners) {
             getPluginManager().registerEvents(listener, this);
-        }
-    }
-
-    /**
-     * Зарагистрировать множество Cloud-команд
-     * @param commands Cloud-команды
-     */
-    private void registerCommands(CloudCommand ...commands) {
-        for (CloudCommand command : commands) {
-            command.register(manager);
         }
     }
 
