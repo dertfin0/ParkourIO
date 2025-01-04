@@ -46,11 +46,6 @@ public class WorldCommand implements CloudCommand {
         );
     }
 
-    @Override
-    public void handle(CommandContext<CommandSender> ctx) {
-
-    }
-
     private void handleCreate(CommandContext<CommandSender> ctx) {
         String name = "worlds/" + ctx.getOrDefault("name", "new_world");
 

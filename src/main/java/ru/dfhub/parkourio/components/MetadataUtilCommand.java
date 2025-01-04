@@ -39,11 +39,6 @@ public class MetadataUtilCommand implements CloudCommand {
         );
     }
 
-    @Override
-    public void handle(CommandContext<CommandSender> ctx) {
-
-    }
-
     private void handleGet(CommandContext<CommandSender> ctx) {
         if (!(ctx.sender() instanceof Player player)) return;
 

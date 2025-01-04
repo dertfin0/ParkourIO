@@ -27,8 +27,6 @@ public class PReloadCommand implements CloudCommand {
         );
     }
 
-    public void handle(CommandContext<CommandSender> ctx) {}
-
     private void reloadConfig(CommandContext<CommandSender> ctx) {
         Config.reload();
         ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
