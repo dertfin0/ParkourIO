@@ -17,7 +17,7 @@ public class Snow extends Thread {
             try { Thread.sleep(350); } catch (InterruptedException e) {}
 
             for (Player p : Bukkit.getOnlinePlayers()) {
-                p.getWorld().spawnParticle(Particle.SNOWFLAKE, p.getLocation(), 50, 16, 16, 16, 0.2);
+                p.getWorld().spawnParticle(Particle.SNOWFLAKE, p.getLocation(), 50, 16, 16, 16, 0.075);
             }
         }
     }
