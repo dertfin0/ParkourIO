@@ -49,5 +49,6 @@ public class ParkourCommand implements CloudCommand {
 
         player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), ctx.get("id")));
         player.teleport(level.getSpawn());
+        ParkourItems.give(player);
     }
 }

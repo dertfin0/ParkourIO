@@ -19,7 +19,7 @@ import java.util.Map;
 
 public class ParkourHandler implements Listener {
 
-    private final Map<String, Long> cooldown = new HashMap<>();
+    private static final Map<String, Long> cooldown = new HashMap<>();
 
     int id;
 
@@ -87,7 +87,7 @@ public class ParkourHandler implements Listener {
         p.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
     }
 
-    private void handleCheckpointTeleport(Player p) {
+    public static void handleCheckpointTeleport(Player p) {
         if (!checkCooldown(p)) return;
 
         if (!p.hasMetadata(Metadata.CHECKPOINT.value())) {
@@ -119,19 +119,19 @@ public class ParkourHandler implements Listener {
         ));
     }
 
-    private boolean checkCooldown(Player player) {
+    private static boolean checkCooldown(Player player) {
         if (!cooldown.containsKey(player.getName())) {
             cooldown.put(player.getName(), System.currentTimeMillis());
             return true;
         };
-        if (System.currentTimeMillis() - cooldown.get(player.getName()) > 2 * 1000) {
+        if (System.currentTimeMillis() - cooldown.get(player.getName()) > 1000) {
             cooldown.put(player.getName(), System.currentTimeMillis());
             return true;
         }
         return false;
     }
 
-    public void setCheckpoint(Player player, int id) {
+    public static void setCheckpoint(Player player, int id) {
         player.setMetadata(Metadata.CHECKPOINT.value(), new FixedMetadataValue(ParkourIO.getInstance(), id));
     }
 }

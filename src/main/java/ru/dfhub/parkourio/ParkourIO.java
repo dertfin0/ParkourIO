@@ -12,6 +12,7 @@ import ru.dfhub.parkourio.components.menu.AboutMenu;
 import ru.dfhub.parkourio.components.menu.ParkourMenu;
 import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
+import ru.dfhub.parkourio.components.parkour.ParkourItems;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -52,7 +53,8 @@ public final class ParkourIO extends JavaPlugin {
                 new DisableBlockGrow(),
                 new InventoryPrevent(),
                 new AboutMenu.Handler(),
-                new ParkourMenu.Handler()
+                new ParkourMenu.Handler(),
+                new ParkourItems.Handler()
         );
         registerCommands(
                 new PReloadCommand(),

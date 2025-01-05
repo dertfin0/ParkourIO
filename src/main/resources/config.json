@@ -62,5 +62,62 @@
       }
     }
   ],
+  "parkour-items" : [
+    {
+      "slot" : 0,
+      "item" : {
+        "material" : "Heavy weighted pressure plate",
+        "amount" : 1,
+
+        "name" : "<green>На чекпоинт</green>",
+        "lore" : [
+          "<dark_gray>Тестовый предмет для паркура</dark_gray>",
+          "<dark_gray><i>он просто существует...</i></dark_gray>"
+        ],
+        "enchanted" : false
+      }
+    },
+    {
+      "slot" : 7,
+      "item" : {
+        "material" : "Ender Eye",
+        "amount" : 1,
+
+        "name" : "<green>На старт</green>",
+        "lore" : [
+          "<dark_gray>Тестовый предмет для паркура</dark_gray>",
+          "<dark_gray><i>он просто существует...</i></dark_gray>"
+        ],
+        "enchanted" : false
+      }
+    },
+    {
+      "slot" : 8,
+      "item" : {
+        "material" : "Oak Door",
+        "amount" : 1,
+
+        "name" : "<green>На спавн</green>",
+        "lore" : [
+          "<dark_gray>Тестовый предмет для паркура</dark_gray>",
+          "<dark_gray><i>он просто существует...</i></dark_gray>"
+        ],
+        "enchanted" : false
+      }
+    }
+  ],
+  "about-menu-items" : [
+    {
+      "material" : "map",
+      "amount" : 1,
+
+      "name" : "<green>Что это за сервер?</green>",
+      "lore" : [
+        "<!i><color:#f0f0f0>ParkourIO - сервер, на котором можно</color>",
+        "<!i><color:#f0f0f0>проходить авторские паркур-карты.</color>"
+      ],
+      "enchanted" : true
+    }
+  ],
   "enable-snow" : true
 }
