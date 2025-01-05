@@ -23,7 +23,6 @@ public class SpawnCommand implements CloudCommand {
         );
     }
 
-    @Override
     public void handle(CommandContext<CommandSender> ctx) {
         if (!(ctx.sender() instanceof Player player)) return;
 
@@ -34,10 +33,10 @@ public class SpawnCommand implements CloudCommand {
         SpawnHandler.handleTeleport(player);
     }
 
-    @Deprecated
     /**
      * @deprecated Больше не используется
      */
+    @Deprecated
     private Location getSpawnLocation() {
         JSONObject data = Config.getConfig().getJSONObject("spawn-location");
         return new Location(

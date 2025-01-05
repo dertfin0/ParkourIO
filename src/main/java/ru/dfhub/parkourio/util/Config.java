@@ -3,12 +3,12 @@ package ru.dfhub.parkourio.util;
 import org.bukkit.Bukkit;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import ru.dfhub.parkourio.ParkourIO;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.logging.Level;
 
 /**
  * Класс для работы с конфигурацией<br>
@@ -44,9 +44,9 @@ public class Config {
         try {
             return new JSONObject(Files.readString(Paths.get(CONFIG_PATH)));
         } catch (IOException e) {
-            Bukkit.getLogger().log(Level.WARNING, "CAN'T READ MAIN PLUGIN CONFIG!");
+            ParkourIO.getInstance().getLogger().severe("CAN'T READ MAIN PLUGIN CONFIG!");
             e.printStackTrace();
-            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "stop");
+            Bukkit.shutdown();
         }
         return null;
     }
