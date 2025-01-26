@@ -30,8 +30,11 @@ public class PunishmentsDAO {
     }
 
     public static void savePunishment(Punishment punishment) {
-        Transaction tx = Database.getSession().beginTransaction();
-        Database.getSession().persist(punishment);
-        tx.commit();
+        CompletableFuture.runAsync(() -> {
+            Transaction tx = Database.getSession().beginTransaction();
+            Database.getSession().persist(punishment);
+            tx.commit();
+        });
+
     }
 }
