@@ -29,4 +29,8 @@ public class Database {
         sessionFactory = configuration.buildSessionFactory();
         session = sessionFactory.openSession();
     }
+
+    public static Session openNewSession() {
+        return sessionFactory.openSession();
+    }
 }

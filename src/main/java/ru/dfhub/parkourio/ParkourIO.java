@@ -17,6 +17,7 @@ import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour.ParkourItems;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
+import ru.dfhub.parkourio.components.punishments.Mute;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
@@ -58,14 +59,16 @@ public final class ParkourIO extends JavaPlugin {
                 new InventoryPrevent(),
                 new AboutMenu.Handler(),
                 new ParkourMenu.Handler(),
-                new ParkourItems.Handler()
+                new ParkourItems.Handler(),
+                new Mute.Handler()
         );
         registerCommands(
                 new PReloadCommand(),
                 new WorldCommand(),
                 new MetadataUtilCommand(),
                 new ParkourCommand(),
-                new SpawnCommand()
+                new SpawnCommand(),
+                new Mute()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
