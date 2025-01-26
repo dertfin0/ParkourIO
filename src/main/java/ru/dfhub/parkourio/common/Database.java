@@ -1,6 +1,7 @@
 package ru.dfhub.parkourio.common;
 
 import lombok.Getter;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.MySQLDialect;
@@ -10,6 +11,9 @@ public class Database {
 
     @Getter
     private static SessionFactory sessionFactory;
+
+    @Getter
+    private static Session session;
 
     public static void init(Class<?>... annotatedClasses) {
         Configuration configuration = new Configuration();
@@ -23,5 +27,6 @@ public class Database {
             configuration.addAnnotatedClass(clazz);
         }
         sessionFactory = configuration.buildSessionFactory();
+        session = sessionFactory.openSession();
     }
 }

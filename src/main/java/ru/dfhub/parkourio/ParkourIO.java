@@ -9,6 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.common.Database;
+import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.menu.AboutMenu;
 import ru.dfhub.parkourio.components.menu.ParkourMenu;
@@ -73,7 +74,7 @@ public final class ParkourIO extends JavaPlugin {
         ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
         //es.submit(new ParticleManager());
         es.submit(snow);
-        Database.init();
+        Database.init(Punishment.class);
     }
 
     @Override

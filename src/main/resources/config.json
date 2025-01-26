@@ -122,6 +122,7 @@
   "enable-snow" : true,
   "database" : {
     "username" : "root",
-    "password" : "1234"
+    "password" : "1234",
+    "connection-url" : ""
   }
 }
