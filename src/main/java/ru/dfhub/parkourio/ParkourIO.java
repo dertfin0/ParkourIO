@@ -1,5 +1,6 @@
 package ru.dfhub.parkourio;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.command.CommandSender;
@@ -28,6 +29,7 @@ import static org.bukkit.Bukkit.getPluginManager;
  */
 public final class ParkourIO extends JavaPlugin {
 
+    @Getter
     private static ParkourIO instance;
     private static LegacyPaperCommandManager<CommandSender> manager;
     private static Snow snow;
@@ -75,14 +77,6 @@ public final class ParkourIO extends JavaPlugin {
     @Override
     public void onDisable() {
         snow.setStopped(true);
-    }
-
-    /**
-     * Получить экземпляр класса плагина
-     * @return ParkourIO Plugin
-     */
-    public static ParkourIO getInstance() {
-        return instance;
     }
 
     /**

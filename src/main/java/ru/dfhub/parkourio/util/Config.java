@@ -1,5 +1,6 @@
 package ru.dfhub.parkourio.util;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -18,15 +19,8 @@ public class Config {
 
     private static final String CONFIG_PATH = "plugins/ParkourIO/config.json";
 
+    @Getter
     private static JSONObject config;
-
-    /**
-     * Получить актуальный конфиг
-     * @return Конфиг
-     */
-    public static JSONObject getConfig() {
-        return config;
-    }
 
     /**
      * Перезагрузить конфиг
@@ -38,7 +32,6 @@ public class Config {
     /**
      * Прочитать конфиг из файла и сереализовать его в JSON<br>
      * Выполнение без ошибок обязательно для работы плагина
-     * @return
      */
     private static JSONObject readConfig() {
         try {
