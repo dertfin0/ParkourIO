@@ -119,5 +119,9 @@
       "enchanted" : true
     }
   ],
-  "enable-snow" : true
+  "enable-snow" : true,
+  "database" : {
+    "username" : "root",
+    "password" : "1234"
+  }
 }
