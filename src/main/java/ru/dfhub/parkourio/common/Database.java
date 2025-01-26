@@ -17,7 +17,7 @@ public class Database {
         configuration.setProperty("hibernate.connection.username", Config.getConfig().getJSONObject("database").getString("username"));
         configuration.setProperty("hibernate.connection.password", Config.getConfig().getJSONObject("database").getString("password"));
         configuration.setProperty("hibernate.dialect", MySQLDialect.class);
-        configuration.setProperty("hibernate.connection.url", "jdbc:mysql://s2.dfhub.ru:3306/testdb");
+        configuration.setProperty("hibernate.connection.url", Config.getConfig().getJSONObject("database").getString("connection-url"));
         configuration.setProperty("hibernate.connection.driver_class", com.mysql.cj.jdbc.Driver.class);
         for (Class<?> clazz : annotatedClasses) {
             configuration.addAnnotatedClass(clazz);
