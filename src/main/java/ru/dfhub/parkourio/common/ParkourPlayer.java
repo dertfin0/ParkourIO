@@ -57,24 +57,28 @@ public class ParkourPlayer {
         return getActiveMute() != null;
     }
 
-    public void ban(long duration, String reason) {
+    public void ban(String from, long duration, String reason) {
         PunishmentsDAO.savePunishment(Punishment
                 .builder()
+                .fromAdmin(from)
                 .type(PunishmentType.BAN)
                 .startsAt(System.currentTimeMillis())
                 .duration(duration)
                 .reason(reason)
+                .active(1)
                 .build()
         );
     }
 
-    public void mute(long duration, String reason) {
+    public void mute(String from, long duration, String reason) {
         PunishmentsDAO.savePunishment(Punishment
                 .builder()
+                .fromAdmin(from)
                 .type(PunishmentType.MUTE)
                 .startsAt(System.currentTimeMillis())
                 .duration(duration)
                 .reason(reason)
+                .active(1)
                 .build()
         );
     }

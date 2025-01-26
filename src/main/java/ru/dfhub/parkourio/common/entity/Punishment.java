@@ -19,6 +19,9 @@ public class Punishment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "from_admin")
+    private String fromAdmin;
+
     private String player;
 
     @Enumerated(value = EnumType.STRING)
@@ -32,7 +35,9 @@ public class Punishment {
 
     private String reason;
 
+    private int active;
+
     public boolean isActive() {
-        return System.currentTimeMillis() > startsAt + duration;
+        return System.currentTimeMillis() > startsAt + duration && active == 1;
     }
 }
