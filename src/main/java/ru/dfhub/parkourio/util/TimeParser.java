@@ -60,7 +60,7 @@ public class TimeParser {
 
         if (seconds == 0) {
         } else if (lastNumOf(seconds) == 1) {
-            sb.append(seconds).append(" секунда, ");
+            sb.append(seconds).append(" секунду, ");
         } else if (List.of(2, 3, 4).contains(lastNumOf(seconds))) {
             sb.append(seconds).append(" секунды, ");
         } else if (List.of(5, 6, 7, 8, 9, 0).contains(lastNumOf(seconds))) {

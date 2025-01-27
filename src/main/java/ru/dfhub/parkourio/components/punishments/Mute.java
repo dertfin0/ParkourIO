@@ -36,6 +36,9 @@ public class Mute implements CloudCommand {
     private void handle(CommandContext<CommandSender> ctx) {
         Player player = ctx.get("player");
 
+        boolean isSilent = ctx.getOrDefault("reason", "").contains("--silent");
+        String reason = ctx.getOrDefault("reason", "Причина не указана").replace("--silent", "");
+
         long duration;
         try {
             duration = TimeParser.stringToLong(ctx.get("duration"));
@@ -47,7 +50,7 @@ public class Mute implements CloudCommand {
         }
 
 
-        new ParkourPlayer(player).mute(ctx.sender().getName(), duration, ctx.getOrDefault("reason", "Причина не указана"));
+        new ParkourPlayer(player).mute(ctx.sender().getName(), duration, reason.isEmpty() ? "Причина не указана" : reason);
 
         ctx.sender().sendMessage(miniMessage().deserialize(
                 "<green>Вы успешно замутили <aqua>%player%</aqua> на <aqua>%time%</aqua>."
@@ -55,7 +58,7 @@ public class Mute implements CloudCommand {
                         .replace("%time%", TimeParser.longToString(duration))
         ));
 
-        if (!ctx.getOrDefault("silent", false)) {
+        if (!isSilent) {
             Component message = miniMessage().deserialize(
                     "<yellow>Администратор <aqua>%admin%</aqua> замутил игрока <aqua>%player%</aqua> на <aqua>%time%</aqua>. Причина: <aqua>%reason%</aqua>"
                             .replace("%admin%", ctx.sender().getName())
