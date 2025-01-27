@@ -28,6 +28,7 @@ public class Mute implements CloudCommand {
                 .required("player", PlayerParser.playerParser())
                 .required("duration", StringParser.stringParser())
                 .optional("reason", StringParser.greedyStringParser())
+                .permission("ru.dfhub.parkourio.punishments.mute")
                 .handler(this::handle)
         );
     }

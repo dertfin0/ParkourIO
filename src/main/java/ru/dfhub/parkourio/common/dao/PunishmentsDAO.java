@@ -3,6 +3,8 @@ package ru.dfhub.parkourio.common.dao;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import ru.dfhub.parkourio.common.Database;
 import ru.dfhub.parkourio.common.entity.Punishment;
@@ -38,6 +40,18 @@ public class PunishmentsDAO {
             tx.commit();
             session.close();
         });
+    }
 
+    public static int unmute(Player player) {
+        try (Session session = Database.openNewSession()) {
+            Transaction tx = session.beginTransaction();
+            // Тут обычный query вместо mutationQuery тк hql не саппортит лимиты, а тут важно заменить только одну строку
+            NativeQuery<Punishment> query = session.createNativeQuery("UPDATE punishments p SET p.active = 0 WHERE p.player = :player ORDER BY id DESC LIMIT 1", Punishment.class);
+            query.setParameter("player", player.getName());
+            int result = query.executeUpdate();
+            tx.commit();
+
+            return result;
+        }
     }
 }

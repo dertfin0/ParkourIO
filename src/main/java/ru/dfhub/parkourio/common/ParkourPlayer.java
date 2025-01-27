@@ -84,4 +84,8 @@ public class ParkourPlayer {
                 .build()
         );
     }
+
+    public int unmute() {
+        return PunishmentsDAO.unmute(this.player);
+    }
 }
