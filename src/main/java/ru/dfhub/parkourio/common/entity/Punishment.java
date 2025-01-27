@@ -38,6 +38,6 @@ public class Punishment {
     private int active;
 
     public boolean isActive() {
-        return System.currentTimeMillis() > startsAt + duration && active == 1;
+        return System.currentTimeMillis() < startsAt + duration && active == 1;
     }
 }

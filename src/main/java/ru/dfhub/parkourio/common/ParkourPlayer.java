@@ -60,6 +60,7 @@ public class ParkourPlayer {
     public void ban(String from, long duration, String reason) {
         PunishmentsDAO.savePunishment(Punishment
                 .builder()
+                .player(this.player.getName())
                 .fromAdmin(from)
                 .type(PunishmentType.BAN)
                 .startsAt(System.currentTimeMillis())
@@ -73,6 +74,7 @@ public class ParkourPlayer {
     public void mute(String from, long duration, String reason) {
         PunishmentsDAO.savePunishment(Punishment
                 .builder()
+                .player(this.player.getName())
                 .fromAdmin(from)
                 .type(PunishmentType.MUTE)
                 .startsAt(System.currentTimeMillis())

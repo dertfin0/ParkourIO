@@ -34,7 +34,7 @@ public class PunishmentsDAO {
         CompletableFuture.runAsync(() -> {
             Session session = Database.openNewSession();
             Transaction tx = session.beginTransaction();
-            Database.getSession().persist(punishment);
+            session.persist(punishment);
             tx.commit();
             session.close();
         });
