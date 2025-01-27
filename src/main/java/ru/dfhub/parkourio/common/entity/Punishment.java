@@ -1,10 +1,7 @@
 package ru.dfhub.parkourio.common.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import ru.dfhub.parkourio.util.PunishmentType;
 
 @Entity
@@ -19,22 +16,26 @@ public class Punishment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "from_admin")
+    @Column(name = "from_admin", nullable = false)
     private String fromAdmin;
 
+    @Column(nullable = false)
     private String player;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private PunishmentType type;
 
-    @Column(name = "starts_at")
+    @Column(name = "starts_at", nullable = false)
     private long startsAt;
 
-    @Column(name = "duration")
+    @Column(name = "duration", nullable = false)
     private long duration;
 
+    @Column(nullable = false)
     private String reason;
 
+    @Column(nullable = false)
     private int active;
 
     public boolean isActive() {

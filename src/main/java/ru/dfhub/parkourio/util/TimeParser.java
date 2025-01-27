@@ -6,14 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 public class TimeParser {
 
-    public static long stringToLong(String timeString) {
+    public static long stringToLong(String timeString) throws Exception{
         if (List.of("permanent", "permanently", "perm", "forever", "перманент", "пермач").contains(timeString)) return -1;
-        int number;
-        try {
-            number = Integer.parseInt(timeString.substring(0, timeString.length() - 1));
-        } catch (IllegalArgumentException e) {
-            return 0L; // Can't parse number
-        }
+        int number = Integer.parseInt(timeString.substring(0, timeString.length() - 1));
 
         return switch (timeString.charAt(timeString.length() - 1)) {
             case 'd' -> TimeUnit.DAYS.toMillis(number);
