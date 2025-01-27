@@ -17,19 +17,20 @@ public class UnMute implements CloudCommand {
                 .required("player", PlayerParser.playerParser())
                 .permission("ru.dfhub.parkourio.punishments.unmute")
                 .handler(ctx -> {
-                    Player player = ctx.get("player");
-                    int result = new ParkourPlayer(player).unmute();
-                    if (result > 0) {
+                    ParkourPlayer player = new ParkourPlayer((Player) ctx.get("player")) ;
+                    if (!player.hasActiveMute()) {
                         ctx.sender().sendMessage(miniMessage().deserialize(
-                                "<green>Вы успешно размутили <aqua>%player%</aqua>!</green>".replace("%player%", player.getName())
+                                "<red>У игрока <aqua>%player%</aqua> нет мутов!</red>".replace("%player%", player.getPlayer().getName())
                         ));
-                    } else {
-                        ctx.sender().sendMessage(miniMessage().deserialize(
-                                "<red>У игрока <aqua>%player%</aqua> нет мутов!</red>".replace("%player%", player.getName())
-                        ));
+                        return;
                     }
 
-                    player.sendMessage(miniMessage().deserialize(
+                    player.unmute();
+                    ctx.sender().sendMessage(miniMessage().deserialize(
+                            "<green>Вы успешно размутили <aqua>%player%</aqua>!</green>".replace("%player%", player.getPlayer().getName())
+                    ));
+
+                    player.getPlayer().sendMessage(miniMessage().deserialize(
                             "<green>Администратор <aqua>%admin%</aqua> снял с вас мут! Теперь вы снова можете писать в чат</green>".replace("%admin%", ctx.sender().getName())
                     ));
                 })
