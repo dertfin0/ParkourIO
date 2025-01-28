@@ -17,7 +17,9 @@ import ru.dfhub.parkourio.components.parkour.ParkourCommand;
 import ru.dfhub.parkourio.components.parkour.ParkourHandler;
 import ru.dfhub.parkourio.components.parkour.ParkourItems;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
+import ru.dfhub.parkourio.components.punishments.Ban;
 import ru.dfhub.parkourio.components.punishments.Mute;
+import ru.dfhub.parkourio.components.punishments.UnBan;
 import ru.dfhub.parkourio.components.punishments.UnMute;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -61,7 +63,8 @@ public final class ParkourIO extends JavaPlugin {
                 new AboutMenu.Handler(),
                 new ParkourMenu.Handler(),
                 new ParkourItems.Handler(),
-                new Mute.Handler()
+                new Mute.Handler(),
+                new Ban.Handler()
         );
         registerCommands(
                 new PReloadCommand(),
@@ -70,7 +73,9 @@ public final class ParkourIO extends JavaPlugin {
                 new ParkourCommand(),
                 new SpawnCommand(),
                 new Mute(),
-                new UnMute()
+                new UnMute(),
+                new Ban(),
+                new UnBan()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
