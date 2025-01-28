@@ -80,12 +80,14 @@ public class ParkourPlayer {
             
                 Администратор %admin% забанил ваш аккаунт по причине:
                 <aqua>%reason%</aqua>
-                До конца блокировки осталось: <aqua>%time%</aqua>
+                %time%
             """
                     .trim()
                     .replace("%admin%", from)
                     .replace("%reason%", reason)
-                    .replace("%time%", TimeParser.longToString(duration))
+                    .replace("%time%", duration == -1 ? "Блокировка выдана <red>навсегда</red>, но данное решение может пересмотреть администратор" :
+                            "До конца блокировки осталось: <aqua>" + TimeParser.longToString(duration) + "</aqua>"
+                    )
             ));
         }
 

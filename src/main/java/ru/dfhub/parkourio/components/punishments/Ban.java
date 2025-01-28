@@ -9,7 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.incendo.cloud.bukkit.parser.PlayerParser;
 import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.StringParser;
@@ -26,7 +25,7 @@ public class Ban implements CloudCommand {
         manager.command(manager
                 .commandBuilder("tempban", "бан")
                 .permission("ru.dfhub.parkourio.punishments.ban")
-                .required("player", PlayerParser.playerParser())
+                .required("player", StringParser.stringParser())
                 .required("duration", StringParser.stringParser())
                 .optional("reason", StringParser.greedyStringParser())
                 .handler(this::handler)
@@ -79,12 +78,14 @@ public class Ban implements CloudCommand {
             
                 Администратор %admin% забанил ваш аккаунт по причине:
                 <aqua>%reason%</aqua>
-                До конца блокировки осталось: <aqua>%time%</aqua>
+                %time%
             """
                 .trim()
                 .replace("%admin%", punishment.getFromAdmin())
                 .replace("%reason%", punishment.getReason())
-                .replace("%time%", TimeParser.longToString(punishment.getStartsAt() + punishment.getDuration() - System.currentTimeMillis()))
+                .replace("%time%", punishment.getDuration() == -1 ? "Блокировка выдана <red>навсегда</red>, но данное решение может пересмотреть администратор" :
+                        "До конца блокировки осталось: <aqua>" + TimeParser.longToString(punishment.getStartsAt() + punishment.getDuration() - System.currentTimeMillis()) + "</aqua>"
+                )
         );
     }
 
