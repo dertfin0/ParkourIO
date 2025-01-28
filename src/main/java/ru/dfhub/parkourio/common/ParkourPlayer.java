@@ -2,20 +2,24 @@ package ru.dfhub.parkourio.common;
 
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import ru.dfhub.parkourio.common.dao.PunishmentsDAO;
 import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.util.PunishmentType;
+import ru.dfhub.parkourio.util.TimeParser;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+
 public class ParkourPlayer {
 
     @Getter
-    private final Player player;
+    private final OfflinePlayer player;
 
-    public ParkourPlayer(Player player) {
+    public ParkourPlayer(OfflinePlayer player) {
         this.player = player;
     }
 
@@ -69,6 +73,22 @@ public class ParkourPlayer {
                 .active(1)
                 .build()
         );
+
+        if (player.isOnline()) {
+            player.getPlayer().kick(miniMessage().deserialize("""
+                <red><b>Ваш аккаунт заблокирован!</b></red>
+            
+                Администратор %admin% забанил ваш аккаунт по причине:
+                <aqua>%reason%</aqua>
+                До конца блокировки осталось: <aqua>%time%</aqua>
+            """
+                    .trim()
+                    .replace("%admin%", from)
+                    .replace("%reason%", reason)
+                    .replace("%time%", TimeParser.longToString(duration))
+            ));
+        }
+
     }
 
     public void mute(String from, long duration, String reason) {
@@ -84,6 +104,8 @@ public class ParkourPlayer {
                 .build()
         );
     }
+
+    public int unban() { return PunishmentsDAO.unban(this.player); }
 
     public int unmute() {
         return PunishmentsDAO.unmute(this.player);

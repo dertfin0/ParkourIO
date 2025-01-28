@@ -3,6 +3,7 @@ package ru.dfhub.parkourio.components.punishments;
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,7 +26,7 @@ public class Mute implements CloudCommand {
         manager.command(manager
                 .commandBuilder("mute", "мут")
                 .flag(manager.flagBuilder("silent").build())
-                .required("player", PlayerParser.playerParser())
+                .required("player", StringParser.stringParser())
                 .required("duration", StringParser.stringParser())
                 .optional("reason", StringParser.greedyStringParser())
                 .permission("ru.dfhub.parkourio.punishments.mute")
@@ -34,7 +35,7 @@ public class Mute implements CloudCommand {
     }
 
     private void handle(CommandContext<CommandSender> ctx) {
-        Player player = ctx.get("player");
+        OfflinePlayer player = Bukkit.getOfflinePlayer(ctx.getOrDefault("player", "null"));
 
         boolean isSilent = ctx.getOrDefault("reason", "").contains("--silent");
         String reason = ctx.getOrDefault("reason", "Причина не указана").replace("--silent", "");
@@ -69,6 +70,16 @@ public class Mute implements CloudCommand {
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.sendMessage(message);
             }
+        }
+
+        if (player.isOnline()) {
+            Component message = miniMessage().deserialize(
+                    "<yellow>Администратор <aqua>%admin%</aqua> замутил вас на <aqua>%time%</aqua>. Причина: <aqua>%reason%</aqua>"
+                            .replace("%admin%", ctx.sender().getName())
+                            .replace("%time%", TimeParser.longToString(duration))
+                            .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
+            );
+            player.getPlayer().sendMessage(message);
         }
     }
 

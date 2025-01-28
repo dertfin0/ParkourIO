@@ -1,5 +1,6 @@
 package ru.dfhub.parkourio.common.dao;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -22,7 +23,7 @@ public class PunishmentsDAO {
         }
     }
 
-    public static List<Punishment> getPunishmentsByPlayer(Player player) {
+    public static List<Punishment> getPunishmentsByPlayer(OfflinePlayer player) {
         try (Session session = Database.openNewSession()) {
             Query<Punishment> query = session.createQuery("FROM Punishment punishment WHERE player = :player", Punishment.class);
             query.setParameter("player", player.getName());
@@ -42,11 +43,24 @@ public class PunishmentsDAO {
         });
     }
 
-    public static int unmute(Player player) {
+    public static int unmute(OfflinePlayer player) {
         try (Session session = Database.openNewSession()) {
             Transaction tx = session.beginTransaction();
             // Тут обычный query вместо mutationQuery тк hql не саппортит лимиты, а тут важно заменить только одну строку
-            NativeQuery<Punishment> query = session.createNativeQuery("UPDATE punishments p SET p.active = 0 WHERE p.player = :player ORDER BY id DESC LIMIT 1", Punishment.class);
+            NativeQuery<Punishment> query = session.createNativeQuery("UPDATE punishments p SET p.active = 0 WHERE p.player = :player AND p.type = 'MUTE' ORDER BY id DESC LIMIT 1", Punishment.class);
+            query.setParameter("player", player.getName());
+            int result = query.executeUpdate();
+            tx.commit();
+
+            return result;
+        }
+    }
+
+    public static int unban(OfflinePlayer player) {
+        try (Session session = Database.openNewSession()) {
+            Transaction tx = session.beginTransaction();
+            // Тут обычный query вместо mutationQuery тк hql не саппортит лимиты, а тут важно заменить только одну строку
+            NativeQuery<Punishment> query = session.createNativeQuery("UPDATE punishments p SET p.active = 0 WHERE p.player = :player AND p.type = 'BAN' ORDER BY id DESC LIMIT 1", Punishment.class);
             query.setParameter("player", player.getName());
             int result = query.executeUpdate();
             tx.commit();
