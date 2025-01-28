@@ -12,9 +12,6 @@ public class Database {
     @Getter
     private static SessionFactory sessionFactory;
 
-    @Getter
-    private static Session session;
-
     public static void init(Class<?>... annotatedClasses) {
         Configuration configuration = new Configuration();
         //Configuration configuration = new Configuration().configure();
@@ -27,7 +24,6 @@ public class Database {
             configuration.addAnnotatedClass(clazz);
         }
         sessionFactory = configuration.buildSessionFactory();
-        session = sessionFactory.openSession();
     }
 
     public static Session openNewSession() {
