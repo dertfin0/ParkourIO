@@ -92,12 +92,18 @@ public class Mute implements CloudCommand {
                 e.setCancelled(true);
                 Punishment mute = player.getActiveMute();
 
-                String hoverText = "<yellow>Администратор <aqua>%admin%</aqua> ограничил вам доступ к чату по причине: <aqua>%reason%</aqua></yellow>"
+                String hoverText = "<yellow>Администратор <aqua>%admin%</aqua> ограничил вам доступ к чату %forever% по причине: <aqua>%reason%</aqua>.</yellow>\n\n<yellow>Данное решение может быть перестроено администратором</yellow>"
                         .replace("%admin%", mute.getFromAdmin())
-                        .replace("%reason%", mute.getReason());
+                        .replace("%reason%", mute.getReason())
+                        .replace("%forever%", mute.getDuration() == -1 ? "<red>НАВСЕГДА</red>" : "");
+
+                String mainMessage = mute.getDuration() == -1 ?
+                        "<red>Вы больше не можете отправлять сообщения в чат! <hover:show_text:'%hover%'><u>Подробнее</u></hover></red>" :
+                        "<red>Вы не можете отправлять сообщения ещё <aqua>%time%</aqua>! <hover:show_text:'%hover%'><u>Подробнее</u></hover></red>";
+
 
                 e.getPlayer().sendMessage(miniMessage().deserialize(
-                        "<red>Вы не можете отправлять сообщения ещё <aqua>%time%</aqua>! <hover:show_text:'%hover%'><u>Подробнее</u></hover></red>"
+                        mainMessage
                                 .replace("%hover%", hoverText)
                                 .replace("%time%", TimeParser.longToString(mute.getStartsAt() + mute.getDuration() - System.currentTimeMillis()))
                 ));
