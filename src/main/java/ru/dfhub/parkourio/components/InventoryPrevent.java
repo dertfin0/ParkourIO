@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryMoveItemEvent;
 import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.util.Metadata;
@@ -48,6 +49,11 @@ public class InventoryPrevent implements Listener {
 
     @EventHandler
     public void onProjectileLaunch(PlayerLaunchProjectileEvent e) {
+        if (e.getPlayer().hasMetadata(Metadata.INVENTORY_PREVENT.value())) e.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onHandItemSwap(PlayerSwapHandItemsEvent e) {
         if (e.getPlayer().hasMetadata(Metadata.INVENTORY_PREVENT.value())) e.setCancelled(true);
     }
 }
