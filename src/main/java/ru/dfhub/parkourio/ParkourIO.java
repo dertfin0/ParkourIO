@@ -78,7 +78,8 @@ public final class ParkourIO extends JavaPlugin {
                 new UnMute(),
                 new Ban(),
                 new UnBan(),
-                new ClearChat()
+                new ClearChat(),
+                new MetadataUtilE()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
