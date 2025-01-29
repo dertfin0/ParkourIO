@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     compileOnly "io.papermc.paper:paper-api:1.21-R0.1-SNAPSHOT"
-    implementation 'org.json:json:20240303'
+    implementation 'org.json:json:20250107'
     implementation 'org.incendo:cloud-paper:2.0.0-beta.10'
     implementation 'ru.dfhub:dfpaperlib:1.2'
 
