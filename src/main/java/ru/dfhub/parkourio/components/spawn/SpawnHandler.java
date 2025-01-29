@@ -46,6 +46,10 @@ public class SpawnHandler implements Listener {
         player.teleport(getSpawnLocation());
         SpawnItems.give(player);
 
+        player.removeMetadata(Metadata.ON_PARKOUR_LEVEL.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
+        player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
+
         if (Config.getConfig().optInt("spawn-parkour-level", -1) != -1) player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), Config.getConfig().getInt("spawn-parkour-level")));
     }
 
