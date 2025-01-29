@@ -18,11 +18,6 @@ import java.util.Map;
  */
 public class MuteCache {
 
-    /* Player, EndsAt
-    -1 - permanent
-    0 - без мута
-    > 0 - с мутом
-     */
     private static final Map<String, Punishment> muteCache = new HashMap<>();
 
     /**
@@ -31,7 +26,7 @@ public class MuteCache {
      * @return Есть ли активный мут у игрока
      */
     public static boolean isMuted(String player) {
-        if (!muteCache.containsKey(player)) return false;
+        if (muteCache.get(player) == null) return false;
         return muteCache.get(player).isActive();
     }
 
