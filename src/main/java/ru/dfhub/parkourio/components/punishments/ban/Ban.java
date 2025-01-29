@@ -1,4 +1,4 @@
-package ru.dfhub.parkourio.components.punishments;
+package ru.dfhub.parkourio.components.punishments.ban;
 
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;

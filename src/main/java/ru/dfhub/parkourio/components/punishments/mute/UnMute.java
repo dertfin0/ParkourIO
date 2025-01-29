@@ -1,11 +1,8 @@
-package ru.dfhub.parkourio.components.punishments;
+package ru.dfhub.parkourio.components.punishments.mute;
 
-import net.kyori.adventure.text.BuildableComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.incendo.cloud.bukkit.parser.PlayerParser;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.common.ParkourPlayer;

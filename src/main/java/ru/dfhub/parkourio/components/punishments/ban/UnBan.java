@@ -1,4 +1,4 @@
-package ru.dfhub.parkourio.components.punishments;
+package ru.dfhub.parkourio.components.punishments.ban;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
