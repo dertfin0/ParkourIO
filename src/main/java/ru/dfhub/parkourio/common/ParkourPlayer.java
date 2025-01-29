@@ -6,6 +6,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import ru.dfhub.parkourio.common.dao.PunishmentsDAO;
 import ru.dfhub.parkourio.common.entity.Punishment;
+import ru.dfhub.parkourio.components.punishments.mute.MuteCache;
 import ru.dfhub.parkourio.util.PunishmentType;
 import ru.dfhub.parkourio.util.TimeParser;
 
@@ -44,6 +45,7 @@ public class ParkourPlayer {
         return punishments.isEmpty() ? null : punishments.getLast();
     }
 
+
     @Nullable
     public Punishment getActiveMute() {
         List<Punishment> punishments = this.getPunishments().stream()
@@ -58,7 +60,8 @@ public class ParkourPlayer {
     }
 
     public boolean hasActiveMute() {
-        return getActiveMute() != null;
+        return MuteCache.isMuted(player.getName());
+        // return getActiveMute() != null; // Old non-cached version
     }
 
     public void ban(String from, long duration, String reason) {
@@ -94,7 +97,7 @@ public class ParkourPlayer {
     }
 
     public void mute(String from, long duration, String reason) {
-        PunishmentsDAO.savePunishment(Punishment
+        Punishment punishment = Punishment
                 .builder()
                 .player(this.player.getName())
                 .fromAdmin(from)
@@ -103,13 +106,16 @@ public class ParkourPlayer {
                 .duration(duration)
                 .reason(reason)
                 .active(1)
-                .build()
-        );
+                .build();
+
+        PunishmentsDAO.savePunishment(punishment);
+        MuteCache.mute(punishment);
     }
 
     public int unban() { return PunishmentsDAO.unban(this.player); }
 
     public int unmute() {
+        MuteCache.unmute(player.getName());
         return PunishmentsDAO.unmute(this.player);
     }
 }

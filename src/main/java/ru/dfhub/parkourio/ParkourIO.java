@@ -20,6 +20,7 @@ import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.punishments.ban.Ban;
 import ru.dfhub.parkourio.components.punishments.ban.UnBan;
 import ru.dfhub.parkourio.components.punishments.mute.Mute;
+import ru.dfhub.parkourio.components.punishments.mute.MuteCache;
 import ru.dfhub.parkourio.components.punishments.mute.UnMute;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -64,7 +65,8 @@ public final class ParkourIO extends JavaPlugin {
                 new ParkourMenu.Handler(),
                 new ParkourItems.Handler(),
                 new Mute.Handler(),
-                new Ban.Handler()
+                new Ban.Handler(),
+                new MuteCache.Handler()
         );
         registerCommands(
                 new PReloadCommand(),
