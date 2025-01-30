@@ -51,17 +51,17 @@ public class Ban implements CloudCommand {
             new ParkourPlayer(player).ban(ctx.sender().getName(), duration, reason.isEmpty() ? "Причина не указана" : reason);
 
             ctx.sender().sendMessage(miniMessage().deserialize(
-                    "<green>Вы успешно забанили <aqua>%player%</aqua> на <aqua>%time%</aqua>."
+                    "<green>Вы успешно забанили <aqua>%player%</aqua> %time%"
                             .replace("%player%", player.getName())
-                            .replace("%time%", TimeParser.longToString(duration))
+                            .replace("%time%", duration == -1 ? "<red>навсегда</red>" : "на <aqua>%s</aqua>".formatted(TimeParser.longToString(duration)))
             ));
 
         if (!isSilent) {
             Component message = miniMessage().deserialize(
-                    "<yellow>Администратор <aqua>%admin%</aqua> забанил игрока <aqua>%player%</aqua> на <aqua>%time%</aqua>. Причина: <aqua>%reason%</aqua>"
+                    "<yellow>Администратор <aqua>%admin%</aqua> забанил игрока <aqua>%player%</aqua> %time%. Причина: <aqua>%reason%</aqua>"
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%player%", player.getName())
-                            .replace("%time%", TimeParser.longToString(duration))
+                            .replace("%time%", duration == -1 ? "<red>навсегда</red>" : "на <aqua>%s</aqua>".formatted(TimeParser.longToString(duration)))
                             .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
             );
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
