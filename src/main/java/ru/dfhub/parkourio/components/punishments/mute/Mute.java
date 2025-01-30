@@ -2,6 +2,7 @@ package ru.dfhub.parkourio.components.punishments.mute;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -106,6 +107,17 @@ public class Mute implements CloudCommand {
                                 .replace("%hover%", hoverText)
                                 .replace("%time%", TimeParser.longToString(mute.getStartsAt() + mute.getDuration() - System.currentTimeMillis()))
                 ));
+
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    if (!p.hasPermission("ru.dfhub.parkourio.punishments.show-muted-msg")) continue;
+                    if (ShowMutedMsg.isDisabled(p)) continue;
+
+                    p.sendMessage(miniMessage().deserialize(
+                            "<red>[Mute]</red> <gray>%player% - %msg%</gray>"
+                                    .replace("%player%", e.getPlayer().getName())
+                                    .replace("%msg%", ((TextComponent) e.message()).content())
+                    ));
+                }
             }
         }
     }
