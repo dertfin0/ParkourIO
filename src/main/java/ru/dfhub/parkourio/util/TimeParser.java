@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class TimeParser {
 
     public static long stringToLong(String timeString) throws Exception{
-        if (List.of("permanent", "permanently", "perm", "forever", "перманент", "пермач").contains(timeString)) return -1;
+        if (List.of("permanent", "permanently", "perm", "forever", "перманент", "пермач", "-1").contains(timeString)) return -1;
         int number = Integer.parseInt(timeString.substring(0, timeString.length() - 1));
 
         return switch (timeString.charAt(timeString.length() - 1)) {
