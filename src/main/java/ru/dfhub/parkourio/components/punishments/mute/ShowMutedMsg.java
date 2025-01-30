@@ -1,6 +1,8 @@
 package ru.dfhub.parkourio.components.punishments.mute;
 
+import net.kyori.adventure.text.TextComponent;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -9,6 +11,8 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Metadata;
+
+import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 
 public class ShowMutedMsg implements CloudCommand {
     @Override
@@ -36,7 +40,20 @@ public class ShowMutedMsg implements CloudCommand {
         }
     }
 
-    public static boolean isDisabled(Player admin) {
+    public static void handle(String player, String message) {
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            if (!p.hasPermission("ru.dfhub.parkourio.punishments.show-muted-msg")) continue;
+            if (isDisabled(p)) continue;
+
+            p.sendMessage(miniMessage().deserialize(
+                    "<red>[Mute]</red> <gray>%player% - %msg%</gray>"
+                            .replace("%player%", player)
+                            .replace("%msg%", message)
+            ));
+        }
+    }
+
+    private static boolean isDisabled(Player admin) {
         return admin.hasMetadata(Metadata.DISABLE_MUTE_MSG.value());
     }
 }

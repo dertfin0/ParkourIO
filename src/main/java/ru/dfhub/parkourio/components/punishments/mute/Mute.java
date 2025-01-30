@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.incendo.cloud.context.CommandContext;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.StringParser;
+import org.w3c.dom.Text;
 import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.util.CloudCommand;
@@ -108,16 +109,7 @@ public class Mute implements CloudCommand {
                                 .replace("%time%", TimeParser.longToString(mute.getStartsAt() + mute.getDuration() - System.currentTimeMillis()))
                 ));
 
-                for (Player p : Bukkit.getOnlinePlayers()) {
-                    if (!p.hasPermission("ru.dfhub.parkourio.punishments.show-muted-msg")) continue;
-                    if (ShowMutedMsg.isDisabled(p)) continue;
-
-                    p.sendMessage(miniMessage().deserialize(
-                            "<red>[Mute]</red> <gray>%player% - %msg%</gray>"
-                                    .replace("%player%", e.getPlayer().getName())
-                                    .replace("%msg%", ((TextComponent) e.message()).content())
-                    ));
-                }
+                ShowMutedMsg.handle(e.getPlayer().getName(), ((TextComponent) e.message()).content());
             }
         }
     }
