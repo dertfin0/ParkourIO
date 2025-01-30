@@ -12,6 +12,8 @@ import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.util.CloudCommand;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 /**
  * Команда-утилита для работы с метадатой(-ами)
  */
@@ -44,7 +46,7 @@ public class MetadataUtilCommand implements CloudCommand {
 
         if (!player.hasMetadata(ctx.get("name"))) {
             player.sendMessage(MiniMessage.miniMessage().deserialize(
-                    "<red>Указанная метадата отсуствует</red>"
+                    getMessage("command.metadata-util.not-found")
             ));
             return;
         }
@@ -57,7 +59,7 @@ public class MetadataUtilCommand implements CloudCommand {
         }
 
         player.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Найдено <blue>%s</blue> значений: <yellow>%s</yellow>.</green>"
+                getMessage("command.metadata-util.values-found")
                         .formatted(
                                 values,
                                 valueBuilder.substring(0, valueBuilder.length() - 2)
@@ -70,7 +72,7 @@ public class MetadataUtilCommand implements CloudCommand {
 
         player.setMetadata(ctx.get("name"), new FixedMetadataValue(ParkourIO.getInstance(), ctx.get("value")));
         player.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Метадата установлена!</green>"
+                getMessage("command.metadata-util.value-set")
         ));
     }
 
@@ -79,14 +81,14 @@ public class MetadataUtilCommand implements CloudCommand {
 
         if (!player.hasMetadata(ctx.get("name"))) {
             player.sendMessage(MiniMessage.miniMessage().deserialize(
-                    "<red>Указанная метадата отсуствует</red>"
+                    getMessage("command.metadata-util.not-found")
             ));
             return;
         }
 
         player.removeMetadata(ctx.get("name"), ParkourIO.getInstance());
         player.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Метадата удалена!</green>"
+                getMessage("command.metadata-util.removed")
         ));
     }
 }

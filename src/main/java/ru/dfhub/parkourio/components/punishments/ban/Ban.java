@@ -18,6 +18,7 @@ import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.TimeParser;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class Ban implements CloudCommand {
     @Override
@@ -42,23 +43,21 @@ public class Ban implements CloudCommand {
             try {
                 duration = TimeParser.stringToLong(ctx.get("duration"));
             } catch (Exception e) {
-                ctx.sender().sendMessage(miniMessage().deserialize(
-                        "<red>Не удалось распознать указанное время!</red>"
-                ));
+                ctx.sender().sendMessage(miniMessage().deserialize(getMessage("punishments.cant-recognize-duration")));
                 return;
             }
 
             new ParkourPlayer(player).ban(ctx.sender().getName(), duration, reason.isEmpty() ? "Причина не указана" : reason);
 
             ctx.sender().sendMessage(miniMessage().deserialize(
-                    "<green>Вы успешно забанили <aqua>%player%</aqua> %time%"
+                    (duration == -1 ? getMessage("punishments.ban.ban.banned-permanently.to-admin") : getMessage("punishments.ban.ban.banned.to-admin"))
                             .replace("%player%", player.getName())
-                            .replace("%time%", duration == -1 ? "<red>навсегда</red>" : "на <aqua>%s</aqua>".formatted(TimeParser.longToString(duration)))
+                            .replace("%time%", TimeParser.longToString(duration))
             ));
 
         if (!isSilent) {
             Component message = miniMessage().deserialize(
-                    "<yellow>Администратор <aqua>%admin%</aqua> забанил игрока <aqua>%player%</aqua> %time%. Причина: <aqua>%reason%</aqua>"
+                    (duration == -1 ? getMessage("punishments.ban.ban.banned-permanently.broadcast") : getMessage("punishments.ban.ban.banned.broadcast"))
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%player%", player.getName())
                             .replace("%time%", duration == -1 ? "<red>навсегда</red>" : "на <aqua>%s</aqua>".formatted(TimeParser.longToString(duration)))
@@ -73,19 +72,11 @@ public class Ban implements CloudCommand {
     public static Component getBanTitle(Player player) {
         Punishment punishment = new ParkourPlayer(player).getActiveBan();
 
-        return miniMessage().deserialize("""
-                <red><b>Ваш аккаунт заблокирован!</b></red>
-            
-                Администратор %admin% забанил ваш аккаунт по причине:
-                <aqua>%reason%</aqua>
-                %time%
-            """
-                .trim()
+        return miniMessage().deserialize(
+                (punishment.getDuration() == -1 ? getMessage("punishments.ban.ban.permanent-kick-reason") : getMessage("punishments.ban.ban.kick-reason"))
                 .replace("%admin%", punishment.getFromAdmin())
                 .replace("%reason%", punishment.getReason())
-                .replace("%time%", punishment.getDuration() == -1 ? "Блокировка выдана <red>навсегда</red>, но данное решение может пересмотреть администратор" :
-                        "До конца блокировки осталось: <aqua>" + TimeParser.longToString(punishment.getStartsAt() + punishment.getDuration() - System.currentTimeMillis()) + "</aqua>"
-                )
+                .replace("%time%", TimeParser.longToString(punishment.getStartsAt() + punishment.getDuration() - System.currentTimeMillis()))
         );
     }
 

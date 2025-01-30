@@ -8,6 +8,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import ru.dfhub.parkourio.util.Config;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 /**
  * Слушатель, отвечающий за сообщения входа/выхода игрков
  */
@@ -25,7 +27,7 @@ public class JoinLeaveMessages implements Listener {
 
     private Component getJoinMessage(String playerName) {
         return MiniMessage.miniMessage().deserialize(
-                Config.getConfig().getJSONObject("join-leave-messages").getString("join-message")
+                getMessage("join-leave-messages.join")
                         .replace("%player%", playerName)
                         .replace("<player>", playerName)
         );
@@ -33,7 +35,7 @@ public class JoinLeaveMessages implements Listener {
 
     private Component getLeaveMessage(String playerName) {
         return MiniMessage.miniMessage().deserialize(
-                Config.getConfig().getJSONObject("join-leave-messages").getString("leave-message")
+                getMessage("join-leave-messages.leave")
                         .replace("%player%", playerName)
                         .replace("<player>", playerName)
         );

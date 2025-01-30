@@ -9,6 +9,7 @@ import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.util.CloudCommand;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class UnMute implements CloudCommand {
     @Override
@@ -23,19 +24,19 @@ public class UnMute implements CloudCommand {
 
                     if (!parkourPlayer.hasActiveMute()) {
                         ctx.sender().sendMessage(miniMessage().deserialize(
-                                "<red>У игрока <aqua>%player%</aqua> нет мутов!</red>".replace("%player%", player.getPlayer().getName())
+                               getMessage("punishments.mute.unmute.hasnt-mutes").formatted(player.getPlayer().getName())
                         ));
                         return;
                     }
 
                     parkourPlayer.unmute();
                     ctx.sender().sendMessage(miniMessage().deserialize(
-                            "<green>Вы успешно размутили <aqua>%player%</aqua>!</green>".replace("%player%", player.getPlayer().getName())
+                            getMessage("punishments.mute.unmute.unmuted").formatted(player.getPlayer().getName())
                     ));
 
                     if (player.isOnline()) {
                         player.getPlayer().sendMessage(miniMessage().deserialize(
-                                "<green>Администратор <aqua>%admin%</aqua> снял с вас мут! Теперь вы снова можете писать в чат</green>".replace("%admin%", ctx.sender().getName())
+                                getMessage("punishments.mute.unmute.unmuted-to-player").replace("%admin%", ctx.sender().getName())
                         ));
                     }
                 })

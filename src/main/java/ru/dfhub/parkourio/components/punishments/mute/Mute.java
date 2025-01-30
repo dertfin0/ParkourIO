@@ -20,6 +20,7 @@ import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.TimeParser;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class Mute implements CloudCommand {
 
@@ -45,9 +46,7 @@ public class Mute implements CloudCommand {
         try {
             duration = TimeParser.stringToLong(ctx.get("duration"));
         } catch (Exception e) {
-            ctx.sender().sendMessage(miniMessage().deserialize(
-                    "<red>Не удалось распознать указанное время!</red>"
-            ));
+            ctx.sender().sendMessage(miniMessage().deserialize(getMessage("punishments.cant-recognize-duration")));
             return;
         }
 
@@ -55,14 +54,14 @@ public class Mute implements CloudCommand {
         new ParkourPlayer(player).mute(ctx.sender().getName(), duration, reason.isEmpty() ? "Причина не указана" : reason);
 
         ctx.sender().sendMessage(miniMessage().deserialize(
-                "<green>Вы успешно замутили <aqua>%player%</aqua> на <aqua>%time%</aqua>."
+                (duration == -1 ? getMessage("punishments.mute.mute.muted-permanently.to-admin") : getMessage("punishments.mute.mute.muted.to-admin"))
                         .replace("%player%", player.getName())
                         .replace("%time%", TimeParser.longToString(duration))
         ));
 
         if (!isSilent) {
             Component message = miniMessage().deserialize(
-                    "<yellow>Администратор <aqua>%admin%</aqua> замутил игрока <aqua>%player%</aqua> на <aqua>%time%</aqua>. Причина: <aqua>%reason%</aqua>"
+                    (duration == -1 ? getMessage("punishments.mute.mute.muted-permanently.broadcast") : getMessage("punishments.mute.mute.muted.broadcast"))
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%player%", player.getName())
                             .replace("%time%", TimeParser.longToString(duration))
@@ -75,7 +74,7 @@ public class Mute implements CloudCommand {
 
         if (player.isOnline()) {
             Component message = miniMessage().deserialize(
-                    "<yellow>Администратор <aqua>%admin%</aqua> замутил вас на <aqua>%time%</aqua>. Причина: <aqua>%reason%</aqua>"
+                    (duration == -1 ? getMessage("punishments.mute.mute.muted-permanently.to-player") : getMessage("punishments.mute.mute.muted.to-player"))
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%time%", TimeParser.longToString(duration))
                             .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
@@ -93,15 +92,11 @@ public class Mute implements CloudCommand {
                 e.setCancelled(true);
                 Punishment mute = player.getActiveMute();
 
-                String hoverText = "<yellow>Администратор <aqua>%admin%</aqua> ограничил вам доступ к чату %forever% по причине: <aqua>%reason%</aqua>.</yellow>\n\n<yellow>Данное решение может быть перестроено администратором</yellow>"
+                String mainMessage = mute.getDuration() == -1 ? getMessage("punishments.mute.mute.message-with-mute-permanent.main") : getMessage("punishments.mute.mute.message-with-mute.main");
+
+                String hoverText = (mute.getDuration() == -1 ? getMessage("punishments.mute.mute.message-with-mute-permanent.hover") : getMessage("punishments.mute.mute.message-with-mute.hover"))
                         .replace("%admin%", mute.getFromAdmin())
-                        .replace("%reason%", mute.getReason())
-                        .replace("%forever%", mute.getDuration() == -1 ? "<red>НАВСЕГДА</red>" : "");
-
-                String mainMessage = mute.getDuration() == -1 ?
-                        "<red>Вы больше не можете отправлять сообщения в чат! <hover:show_text:'%hover%'><u>Подробнее</u></hover></red>" :
-                        "<red>Вы не можете отправлять сообщения ещё <aqua>%time%</aqua>! <hover:show_text:'%hover%'><u>Подробнее</u></hover></red>";
-
+                        .replace("%reason%", mute.getReason());
 
                 e.getPlayer().sendMessage(miniMessage().deserialize(
                         mainMessage

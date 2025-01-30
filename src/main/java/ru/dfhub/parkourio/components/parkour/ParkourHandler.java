@@ -17,6 +17,8 @@ import ru.dfhub.parkourio.util.TimeUtil;
 import java.util.HashMap;
 import java.util.Map;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 public class ParkourHandler implements Listener {
 
     private static final Map<String, Long> cooldown = new HashMap<>();
@@ -32,7 +34,6 @@ public class ParkourHandler implements Listener {
 
         // Check for fall
         if (location.getBlockY() <= ParkourLevels.getLevelById(level).getFallLevel()) {
-            //e.getPlayer().teleport(ParkourLevels.getLevelById(level).getSpawn()); // TODO: In ftr - checkpoint (from metadata)
             handleCheckpointTeleport(e.getPlayer());
             cooldown.remove(e.getPlayer().getName());
         }
@@ -67,9 +68,7 @@ public class ParkourHandler implements Listener {
     private void handleStart(Player p) {
         if (!checkCooldown(p)) return;
         p.setMetadata(Metadata.STARTED_AT.value(), new FixedMetadataValue(ParkourIO.getInstance(), System.currentTimeMillis()));
-        p.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Вы начали паркур!</green>"
-        ));
+        p.sendMessage(MiniMessage.miniMessage().deserialize(getMessage("parkour.started")));
         setCheckpoint(p, -1); // Spawn checkpoint
     }
 
@@ -78,7 +77,7 @@ public class ParkourHandler implements Listener {
         if (!checkCooldown(p)) return;
 
         p.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Вы закончили паркур за <aqua>%s</aqua>!</green>".formatted(
+                getMessage("parkour.finished").formatted(
                         TimeUtil.formatTime(System.currentTimeMillis() - p.getMetadata(Metadata.STARTED_AT.value()).getFirst().asLong())
                 )
         ));
@@ -113,7 +112,7 @@ public class ParkourHandler implements Listener {
 
         if (noMessage) return;
         p.sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Вы дошли до чекпоинта за <aqua>%s</aqua>!</green>".formatted(
+                getMessage("parkour.checkpoint").formatted(
                         TimeUtil.formatTime(System.currentTimeMillis() - p.getMetadata(Metadata.STARTED_AT.value()).getFirst().asLong())
                 )
         ));

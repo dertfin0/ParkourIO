@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class ParkourPlayer {
 
@@ -78,19 +79,11 @@ public class ParkourPlayer {
         );
 
         if (player.isOnline()) {
-            player.getPlayer().kick(miniMessage().deserialize("""
-                <red><b>Ваш аккаунт заблокирован!</b></red>
-            
-                Администратор %admin% забанил ваш аккаунт по причине:
-                <aqua>%reason%</aqua>
-                %time%
-            """
-                    .trim()
+            player.getPlayer().kick(miniMessage().deserialize(
+                    (duration == 1 ? getMessage("punishments.ban.ban.permanent-kick-reason") : getMessage("punishments.ban.ban.kick-reason"))
                     .replace("%admin%", from)
                     .replace("%reason%", reason)
-                    .replace("%time%", duration == -1 ? "Блокировка выдана <red>навсегда</red>, но данное решение может пересмотреть администратор" :
-                            "До конца блокировки осталось: <aqua>" + TimeParser.longToString(duration) + "</aqua>"
-                    )
+                    .replace("%time%", TimeParser.longToString(duration))
             ));
         }
 

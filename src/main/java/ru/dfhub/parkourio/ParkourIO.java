@@ -26,6 +26,7 @@ import ru.dfhub.parkourio.components.punishments.mute.UnMute;
 import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
+import ru.dfhub.parkourio.util.MessageManager;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -91,6 +92,7 @@ public final class ParkourIO extends JavaPlugin {
         //es.submit(new ParticleManager());
         es.submit(snow);
         Database.init(Punishment.class);
+        MessageManager.init();
     }
 
     @Override

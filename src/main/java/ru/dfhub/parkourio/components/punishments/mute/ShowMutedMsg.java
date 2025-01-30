@@ -13,6 +13,7 @@ import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Metadata;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class ShowMutedMsg implements CloudCommand {
     @Override
@@ -30,13 +31,11 @@ public class ShowMutedMsg implements CloudCommand {
         if (sender.hasMetadata(Metadata.DISABLE_MUTE_MSG.value())) {
             sender.removeMetadata(Metadata.DISABLE_MUTE_MSG.value(), ParkourIO.getInstance());
             sender.sendMessage(MiniMessage.miniMessage().deserialize(
-                    "<yellow>Отображение сообщений в мьюте <green>включены</green>!"
+                    getMessage("punishments.mute.show-muted-msg.enabled")
             ));
         } else {
             sender.setMetadata(Metadata.DISABLE_MUTE_MSG.value(), new FixedMetadataValue(ParkourIO.getInstance(), true));
-            sender.sendMessage(MiniMessage.miniMessage().deserialize(
-                    "<yellow>Отображение сообщений в мьюте <red>выключены</red>!"
-            ));
+            sender.sendMessage(MiniMessage.miniMessage().deserialize(getMessage("punishments.mute.show-muted-msg.disabled")));
         }
     }
 
@@ -46,7 +45,7 @@ public class ShowMutedMsg implements CloudCommand {
             if (isDisabled(p)) continue;
 
             p.sendMessage(miniMessage().deserialize(
-                    "<red>[Mute]</red> <gray>%player% - %msg%</gray>"
+                    getMessage("punishments.mute.show-muted-msg.format")
                             .replace("%player%", player)
                             .replace("%msg%", message)
             ));

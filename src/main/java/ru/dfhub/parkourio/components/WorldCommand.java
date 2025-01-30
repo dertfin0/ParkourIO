@@ -17,6 +17,8 @@ import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.EmptyChunkGenerator;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 /**
  * Команда для работы с мирами (создание/тп/загрузка)
  */
@@ -76,8 +78,6 @@ public class WorldCommand implements CloudCommand {
         String name = "worlds/" + ctx.getOrDefault("name", "world_name");
 
         Bukkit.createWorld(new WorldCreator(name));
-        ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Мир загружен!</green>"
-        ));
+        ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(getMessage("command.world.on-loaded")));
     }
 }

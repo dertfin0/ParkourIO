@@ -15,6 +15,8 @@ import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Metadata;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 public class ParkourCommand implements CloudCommand {
     @Override
     public void register(LegacyPaperCommandManager<CommandSender> manager) {
@@ -37,7 +39,7 @@ public class ParkourCommand implements CloudCommand {
         ParkourLevel level = ParkourLevels.getLevelById(ctx.getOrDefault("id", 9999999));
         if (level == null) {
             ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
-                    "<red>Уровень не найден!</red>"
+                    getMessage("command.parkour.not-found")
             ));
             return;
         }

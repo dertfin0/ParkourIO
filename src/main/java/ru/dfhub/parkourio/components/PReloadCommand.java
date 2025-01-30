@@ -9,6 +9,8 @@ import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 /**
  * Комадна для перезагрузки кастомных компонентов плагина
  */
@@ -30,14 +32,14 @@ public class PReloadCommand implements CloudCommand {
     private void reloadConfig(CommandContext<CommandSender> ctx) {
         Config.reload();
         ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
-            "<green>Конфиг перезагружен!</green>"
+            getMessage("command.reload.config")
         ));
     }
 
     private void reloadLevels(CommandContext<CommandSender> ctx) {
         ParkourLevels.reload();
         ctx.sender().sendMessage(MiniMessage.miniMessage().deserialize(
-                "<green>Уровни паркура перезагружены!</green>"
+                getMessage("command.reload.levels")
         ));
     }
 }

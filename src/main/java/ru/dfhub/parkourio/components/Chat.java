@@ -18,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
+
 /**
  * Слушатель событий, отвечающий за формат чата, цензур-фильтр и др
  */
@@ -83,19 +85,18 @@ public class Chat implements Listener {
 
 
         e.getPlayer().sendMessage(MiniMessage.miniMessage().deserialize(
-                Config.getConfig().getJSONObject("chat").getString("censored-message-warn-player")
-                        .replace("%words%", hoverWords)
+                getMessage("censored-message-warn").replace("%words%", hoverWords)
         ));
         playBadSound(e.getPlayer());
     }
 
     private String getFormat() {
-        return Config.getConfig().getJSONObject("chat").getString("chat-message-format");
+        return getMessage("chat.format");
     }
 
     private Component getExclamationPreventMessage() {
         return MiniMessage.miniMessage().deserialize(
-                Config.getConfig().getJSONObject("chat").getString("exclamation-prevent-message")
+                getMessage("chat.exclamation-warning")
         );
     }
 

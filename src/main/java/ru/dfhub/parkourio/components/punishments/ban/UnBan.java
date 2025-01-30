@@ -9,6 +9,7 @@ import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.util.CloudCommand;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
+import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
 public class UnBan implements CloudCommand {
     @Override
@@ -25,13 +26,13 @@ public class UnBan implements CloudCommand {
         ParkourPlayer player = new ParkourPlayer(Bukkit.getOfflinePlayer(ctx.getOrDefault("player", "null"))) ;
         if (!player.hasActiveBan()) {
             ctx.sender().sendMessage(miniMessage().deserialize(
-                    "<red>У игрока <aqua>%player%</aqua> нет банов!</red>".replace("%player%", player.getPlayer().getName())
+                    getMessage("punishments.ban.unban.not-found").replace("%player%", player.getPlayer().getName())
             ));
             return;
         }
         player.unban();
         ctx.sender().sendMessage(miniMessage().deserialize(
-                "<green>Игрок <aqua>%player%</aqua> разбанен!</green>".replace("%player%", player.getPlayer().getName())
+                getMessage("punishments.ban.unban.unbanned").replace("%player%", player.getPlayer().getName())
         ));
     }
 }
