@@ -51,7 +51,7 @@ public class PunishmentsCommand implements CloudCommand {
                 getMessage("command.punishments.header").replace("%player%", ctx.get("player"))
         ));
 
-        for (int i = 0; i <= (punishments.size() > limit ? limit -1 : punishments.size() - 1); i++) {
+        for (int i = (punishments.size() < limit ? 0 : punishments.size() - limit); i < punishments.size(); i++) {
             Punishment p = punishments.get(i);
 
             String prefix = switch (p.getType()) {
