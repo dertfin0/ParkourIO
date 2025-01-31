@@ -29,6 +29,7 @@ public class Ban implements CloudCommand {
                 .required("player", StringParser.stringParser())
                 .required("duration", StringParser.stringParser())
                 .optional("reason", StringParser.greedyStringParser())
+                .flag(manager.flagBuilder("silent").build())
                 .handler(this::handler)
         );
     }
