@@ -41,4 +41,8 @@ public class Punishment {
     public boolean isActive() {
         return System.currentTimeMillis() < startsAt + duration && active == 1 || ( duration == -1 && active == 1);
     }
+
+    public boolean isLate() {
+        return System.currentTimeMillis() > startsAt + duration;
+    }
 }

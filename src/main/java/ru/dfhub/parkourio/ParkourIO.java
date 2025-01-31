@@ -19,6 +19,7 @@ import ru.dfhub.parkourio.components.parkour.ParkourItems;
 import ru.dfhub.parkourio.components.parkour_level.ParkourLevels;
 import ru.dfhub.parkourio.components.punishments.FakeKick;
 import ru.dfhub.parkourio.components.punishments.Kick;
+import ru.dfhub.parkourio.components.punishments.PunishmentsCommand;
 import ru.dfhub.parkourio.components.punishments.ban.Ban;
 import ru.dfhub.parkourio.components.punishments.ban.UnBan;
 import ru.dfhub.parkourio.components.punishments.mute.Mute;
@@ -86,7 +87,8 @@ public final class ParkourIO extends JavaPlugin {
                 new MetadataUtilE(),
                 new ShowMutedMsg(),
                 new FakeKick(),
-                new Kick()
+                new Kick(),
+                new PunishmentsCommand()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
