@@ -105,6 +105,26 @@ public class ParkourPlayer {
         MuteCache.mute(punishment);
     }
 
+    public void kick(String from, String reason) {
+        Punishment punishment = Punishment
+                .builder()
+                .player(this.player.getName())
+                .fromAdmin(from)
+                .type(PunishmentType.KICK)
+                .reason(reason)
+                .startsAt(System.currentTimeMillis())
+                .duration(0)
+                .active(1)
+                .build();
+        PunishmentsDAO.savePunishment(punishment);
+
+        if (player.isOnline()) {
+            player.getPlayer().kick(miniMessage().deserialize(getMessage("punishments.kick.title")
+                    .replace("%reason%", reason)
+            ));
+        }
+    }
+
     public int unban() { return PunishmentsDAO.unban(this.player); }
 
     public int unmute() {
