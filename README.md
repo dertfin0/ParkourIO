@@ -13,6 +13,13 @@
 `ru.dfhub.parkourio.command.metadata-util` - Команда /metadata-util  
 `ru.dfhub.parkourio.command.parkour` - Команда /parkour  
 `ru.dfhub.parkourio.command.spawn` - Команда /spawn  
+`ru.dfhub.parkourio.command.punishments` - Команда /punishments  
+`ru.dfhub.parkourio.punishments.fake-kick` - Команда /fake-kick  
+`ru.dfhub.parkourio.punishments.kick` - Команда /kick  
+`ru.dfhub.parkourio.punishments.ban` - Команда /ban
+`ru.dfhub.parkourio.punishments.unban` - Команда /unban
+`ru.dfhub.parkourio.punishments.mute` - Команда /mute
+`ru.dfhub.parkourio.punishments.unmute` - Команда /mute
 
 ## Основные моменты 
 Каждый заход игрока на сервер подразумевает:
