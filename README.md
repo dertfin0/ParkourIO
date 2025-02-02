@@ -8,11 +8,11 @@
 ## Пермишены
 Все пермишены, как и метадаты (о них позже), начинаются с имени пакета - `ru.dfhub.parkourio` и `command`
 
-`ru.dfhub.parkourio.command.reload` - Команда /reload
-`ru.dfhub.parkourio.command.world` - Команда /world
-`ru.dfhub.parkourio.command.metadata-util` - Команда /metadata-util
-`ru.dfhub.parkourio.command.parkour` - Команда /parkour
-`ru.dfhub.parkourio.command.spawn` - Команда /spawn
+`ru.dfhub.parkourio.command.reload` - Команда /reload  
+`ru.dfhub.parkourio.command.world` - Команда /world  
+`ru.dfhub.parkourio.command.metadata-util` - Команда /metadata-util  
+`ru.dfhub.parkourio.command.parkour` - Команда /parkour  
+`ru.dfhub.parkourio.command.spawn` - Команда /spawn  
 
 ## Основные моменты 
 Каждый заход игрока на сервер подразумевает:
@@ -233,8 +233,8 @@
 В списке причин предложены различные сообщения, которые могут периодически быть выданы игрой.
 Притом, каждое из них немного отличается и можно его опознать (для игнорирования тикетов).
 
-`timeout` - *"Превышено время ожидания."* - содержит точку в конце, которой нет в стандартном сообщении.
-`disconnected` - *"Disconnected."* - содержит точку в конце, которой нет в стандартном сообщении.
+`timeout` - *"Превышено время ожидания."* - содержит точку в конце, которой нет в стандартном сообщении.  
+`disconnected` - *"Disconnected."* - содержит точку в конце, которой нет в стандартном сообщении.  
 `java-ioe` - *"Internal exception: java.io.IOException: Received string length longer than the maximum allowed (3035>256)"*" - размер пакета `3035`
 
 ## Просмотр списка наказаний
