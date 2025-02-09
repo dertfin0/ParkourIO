@@ -10,6 +10,7 @@ import org.incendo.cloud.execution.ExecutionCoordinator;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import ru.dfhub.parkourio.common.Database;
 import ru.dfhub.parkourio.common.entity.Punishment;
+import ru.dfhub.parkourio.common.entity.Timeplayed;
 import ru.dfhub.parkourio.components.*;
 import ru.dfhub.parkourio.components.menu.AboutMenu;
 import ru.dfhub.parkourio.components.menu.ParkourMenu;
@@ -71,7 +72,8 @@ public final class ParkourIO extends JavaPlugin {
                 new ParkourItems.Handler(),
                 new Mute.Handler(),
                 new Ban.Handler(),
-                new MuteCache.Handler()
+                new MuteCache.Handler(),
+                new TimeplayedCommand.Handler()
         );
         registerCommands(
                 new PReloadCommand(),
@@ -88,7 +90,8 @@ public final class ParkourIO extends JavaPlugin {
                 new ShowMutedMsg(),
                 new FakeKick(),
                 new Kick(),
-                new PunishmentsCommand()
+                new PunishmentsCommand(),
+                new TimeplayedCommand()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();
@@ -97,7 +100,7 @@ public final class ParkourIO extends JavaPlugin {
         ExecutorService es = Executors.newVirtualThreadPerTaskExecutor();
         //es.submit(new ParticleManager());
         es.submit(snow);
-        Database.init(Punishment.class);
+        Database.init(Punishment.class, Timeplayed.class);
         MessageManager.init();
     }
 

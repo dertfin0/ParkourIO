@@ -5,10 +5,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import ru.dfhub.parkourio.common.dao.PunishmentsDAO;
+import ru.dfhub.parkourio.common.dao.TimeplayedDAO;
 import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.components.punishments.mute.MuteCache;
 import ru.dfhub.parkourio.util.PunishmentType;
 import ru.dfhub.parkourio.util.TimeParser;
+import ru.dfhub.parkourio.util.TimeUtil;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -123,6 +125,19 @@ public class ParkourPlayer {
                     .replace("%reason%", reason)
             ));
         }
+    }
+
+    public long getTimeplayed() {
+        return TimeplayedDAO.getTime(this.player.getName());
+    }
+
+    public void setTimeplayed(long newTime) {
+        TimeplayedDAO.setTime(this.player.getName(), newTime);
+    }
+
+    public void addTimeplayed(long newTime) {
+        long oldTime = TimeplayedDAO.getTime(this.player.getName());
+        TimeplayedDAO.setTime(this.player.getName(), oldTime + newTime);
     }
 
     public int unban() { return PunishmentsDAO.unban(this.player); }

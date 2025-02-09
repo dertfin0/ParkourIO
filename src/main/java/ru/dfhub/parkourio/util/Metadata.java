@@ -6,7 +6,8 @@ public enum Metadata {
     CHECKPOINT("ru.dfhub.parkourio.parkour.checkpoint"),
     INVENTORY_PREVENT("ru.dfhub.parkourio.inventory-prevent"),
     OPENED_PARKOUR_MENU("ru.dfhub.parkourio.opened-parkour-menu"),
-    DISABLE_MUTE_MSG("ru.dfhub.parkourio.disable-mute-msg")
+    DISABLE_MUTE_MSG("ru.dfhub.parkourio.disable-mute-msg"),
+    JOINED_AT("ru.dfhub.parkourio.joined-at")
     ;
 
     private final String value;
