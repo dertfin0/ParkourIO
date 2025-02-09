@@ -13,6 +13,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.json.JSONObject;
 import ru.dfhub.parkourio.ParkourIO;
+import ru.dfhub.parkourio.components.parkour.ParkourItems;
 import ru.dfhub.parkourio.util.Config;
 import ru.dfhub.parkourio.util.Metadata;
 
@@ -42,6 +43,19 @@ public class SpawnHandler implements Listener {
         if (!e.getPlayer().hasPermission("ru.dfhub.parkourio.spawn.build")) e.setCancelled(true);
     }
 
+    @EventHandler
+    public void onCloseToSpawnParkour(PlayerMoveEvent e) {
+        if (e.getPlayer().hasMetadata(Metadata.ON_PARKOUR_LEVEL.value())) return;
+        if (e.getTo().getWorld().getName().equals(getSpawnLocation().getWorld().getName()) &&
+                e.getTo().getBlockY() == 7 &&
+                e.getTo().getBlockX() <= -16 && e.getTo().getBlockX() >= -18 &&
+                e.getTo().getBlockZ() <= -21 && e.getTo().getBlockZ() >= -23
+        ) {
+            e.getPlayer().setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), Config.getConfig().getInt("spawn-parkour-level")));
+            ParkourItems.give(e.getPlayer());
+        }
+    }
+
     public static void handleTeleport(Player player) {
         player.teleport(getSpawnLocation());
         SpawnItems.give(player);
@@ -50,7 +64,8 @@ public class SpawnHandler implements Listener {
         player.removeMetadata(Metadata.STARTED_AT.value(), ParkourIO.getInstance());
         player.removeMetadata(Metadata.CHECKPOINT.value(), ParkourIO.getInstance());
 
-        if (Config.getConfig().optInt("spawn-parkour-level", -1) != -1) player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), Config.getConfig().getInt("spawn-parkour-level")));
+        // Игрок при телепортации на спавн автоматически получает метадату, что он на спавновом паркуре
+        //if (Config.getConfig().optInt("spawn-parkour-level", -1) != -1) player.setMetadata(Metadata.ON_PARKOUR_LEVEL.value(), new FixedMetadataValue(ParkourIO.getInstance(), Config.getConfig().getInt("spawn-parkour-level")));
     }
 
     private static Location getSpawnLocation() {
