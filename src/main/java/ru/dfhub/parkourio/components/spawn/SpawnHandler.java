@@ -3,6 +3,7 @@ package ru.dfhub.parkourio.components.spawn;
 import net.kyori.adventure.text.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -71,6 +72,7 @@ public class SpawnHandler implements Listener {
         if (!e.getPlayer().getWorld().getName().equals(getSpawnLocation().getWorld().getName())) return;
         if(e.getRightClicked().getLocation().getBlockX() != 20 || e.getRightClicked().getLocation().getBlockZ() != -4) return;
         e.setCancelled(true);
+        e.getPlayer().getLocation().getWorld().playSound(e.getPlayer(), Sound.ENTITY_VILLAGER_CELEBRATE, 0.5f, 1f);
         CompletableFuture.runAsync(() -> {
             try {
                 e.getPlayer().sendMessage(miniMessage().deserialize("<yellow>> Добро пожаловать на <gradient:#7733ff:#b82bff><b>ParkourIO</b></gradient>!</yellow>"));
