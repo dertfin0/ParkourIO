@@ -28,7 +28,7 @@ public class ParkourPlayer {
     }
 
     public ParkourPlayer(String player) {
-        this.player = Bukkit.getPlayer(player);
+        this.player = Bukkit.getOfflinePlayer(player);
     }
 
     public boolean isOnline() {
