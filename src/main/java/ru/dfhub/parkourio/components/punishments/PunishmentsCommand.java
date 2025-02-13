@@ -12,6 +12,7 @@ import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.common.dao.PunishmentsDAO;
 import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.util.CloudCommand;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 import ru.dfhub.parkourio.util.TimeParser;
 
 import java.sql.Time;
@@ -31,7 +32,7 @@ public class PunishmentsCommand implements CloudCommand {
         manager.command(manager
                 .commandBuilder("punishments")
                 .permission("ru.dfhub.parkourio.command.punishments")
-                .required("player", StringParser.stringParser())
+                .required("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
                 .optional("limit", IntegerParser.integerParser(1, 100))
                 .handler(this::handle)
         );

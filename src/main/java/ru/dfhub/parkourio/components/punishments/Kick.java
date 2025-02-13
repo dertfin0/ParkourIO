@@ -8,6 +8,7 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.util.CloudCommand;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 import static ru.dfhub.parkourio.util.MessageManager.getMessage;
@@ -18,7 +19,7 @@ public class Kick implements CloudCommand {
         manager.command(manager
                 .commandBuilder("kick", "kick")
                 .permission("ru.dfhub.parkourio.punishments.kick")
-                .required("player", PlayerParser.playerParser())
+                .required("player", PlayerParser.playerParser(), new TempPlayerListCache.Suggestions())
                 .required("reason", StringParser.greedyStringParser())
                 .flag(manager.flagBuilder("silent").build())
                 .handler(this::handler)

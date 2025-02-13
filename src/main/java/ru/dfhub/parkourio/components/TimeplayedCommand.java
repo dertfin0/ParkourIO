@@ -13,8 +13,8 @@ import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Metadata;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 
-import java.util.concurrent.TimeUnit;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 import static ru.dfhub.parkourio.util.MessageManager.getMessage;
@@ -25,7 +25,7 @@ public class TimeplayedCommand implements CloudCommand {
         manager.command(manager
                 .commandBuilder("timeplayed")
                 .permission("ru.dfhub.parkourio.command.timeplayed")
-                .optional("player", StringParser.stringParser())
+                .optional("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
                 .handler(this::handle)
         );
     }

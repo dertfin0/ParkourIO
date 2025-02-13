@@ -8,6 +8,7 @@ import org.incendo.cloud.bukkit.parser.PlayerParser;
 import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.EnumParser;
 import ru.dfhub.parkourio.util.CloudCommand;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 
 import static ru.dfhub.parkourio.util.MessageManager.getMessage;
 
@@ -37,7 +38,7 @@ public class FakeKick implements CloudCommand {
         manager.command(manager
                 .commandBuilder("fake-kick", "kick-fake")
                 .permission("ru.dfhub.parkourio.punishments.fake-kick")
-                .required("player", PlayerParser.playerParser())
+                .required("player", PlayerParser.playerParser(), new TempPlayerListCache.Suggestions())
                 .required("reason", EnumParser.enumParser(Reason.class))
                 .handler(ctx -> {
                     Player player = ctx.get("player");

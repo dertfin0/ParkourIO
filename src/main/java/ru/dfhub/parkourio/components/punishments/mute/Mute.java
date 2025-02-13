@@ -17,6 +17,7 @@ import org.w3c.dom.Text;
 import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.common.entity.Punishment;
 import ru.dfhub.parkourio.util.CloudCommand;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 import ru.dfhub.parkourio.util.TimeParser;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
@@ -28,7 +29,7 @@ public class Mute implements CloudCommand {
         manager.command(manager
                 .commandBuilder("mute", "мут")
                 .flag(manager.flagBuilder("silent").build())
-                .required("player", StringParser.stringParser())
+                .required("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
                 .required("duration", StringParser.stringParser())
                 .optional("reason", StringParser.greedyStringParser())
                 .permission("ru.dfhub.parkourio.punishments.mute")

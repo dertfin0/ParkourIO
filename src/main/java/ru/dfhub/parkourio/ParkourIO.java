@@ -31,6 +31,7 @@ import ru.dfhub.parkourio.components.spawn.SpawnHandler;
 import ru.dfhub.parkourio.util.CloudCommand;
 import ru.dfhub.parkourio.util.Config;
 import ru.dfhub.parkourio.util.MessageManager;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -73,7 +74,8 @@ public final class ParkourIO extends JavaPlugin {
                 new Mute.Handler(),
                 new Ban.Handler(),
                 new MuteCache.Handler(),
-                new TimeplayedCommand.Handler()
+                new TimeplayedCommand.Handler(),
+                new TempPlayerListCache.Handler()
         );
         registerCommands(
                 new PReloadCommand(),

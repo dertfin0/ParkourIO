@@ -7,6 +7,7 @@ import org.incendo.cloud.paper.LegacyPaperCommandManager;
 import org.incendo.cloud.parser.standard.StringParser;
 import ru.dfhub.parkourio.common.ParkourPlayer;
 import ru.dfhub.parkourio.util.CloudCommand;
+import ru.dfhub.parkourio.util.TempPlayerListCache;
 
 import static net.kyori.adventure.text.minimessage.MiniMessage.miniMessage;
 import static ru.dfhub.parkourio.util.MessageManager.getMessage;
@@ -16,7 +17,7 @@ public class UnMute implements CloudCommand {
     public void register(LegacyPaperCommandManager<CommandSender> manager) {
         manager.command(manager
                 .commandBuilder("unmute")
-                .required("player", StringParser.stringParser())
+                .required("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
                 .permission("ru.dfhub.parkourio.punishments.unmute")
                 .handler(ctx -> {
                     OfflinePlayer player = Bukkit.getOfflinePlayer(ctx.getOrDefault("player", "null"));
