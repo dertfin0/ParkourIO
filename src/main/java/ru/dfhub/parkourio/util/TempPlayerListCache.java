@@ -12,6 +12,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import org.incendo.cloud.context.CommandInput;
 import org.incendo.cloud.suggestion.Suggestion;
 import org.incendo.cloud.suggestion.SuggestionProvider;
+import ru.dfhub.parkourio.common.dao.TimeplayedDAO;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,8 +23,10 @@ import java.util.concurrent.CompletableFuture;
  */
 public class TempPlayerListCache {
 
+    @Deprecated
     private static final HashSet<String> players = new HashSet<>();
 
+    @Deprecated
     public static class Handler implements Listener {
         @EventHandler
         public void onPlayerJoin(PlayerJoinEvent e) {
@@ -32,9 +35,21 @@ public class TempPlayerListCache {
     }
 
     public static class Suggestions implements SuggestionProvider<CommandSender> {
+
+        /*
         @Override
         public @NonNull CompletableFuture<? extends @NonNull Iterable<? extends @NonNull Suggestion>> suggestionsFuture(org.incendo.cloud.context.@NonNull CommandContext<CommandSender> context, @NonNull CommandInput input) {
             return CompletableFuture.supplyAsync(() -> players.stream().map(Suggestion::suggestion).toList());
         }
+
+         */
+
+        @Override
+        public @NonNull CompletableFuture<? extends @NonNull Iterable<? extends @NonNull Suggestion>> suggestionsFuture(org.incendo.cloud.context.@NonNull CommandContext<CommandSender> context, @NonNull CommandInput input) {
+            return CompletableFuture.supplyAsync(() -> TimeplayedDAO.getPlayers()
+                    .stream()
+                    .map(Suggestion::suggestion)
+                    .toList());
+        }
     }
-} // TODO: Сохранять всех игроков, которые когда-либо заходили
+}

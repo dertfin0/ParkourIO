@@ -9,8 +9,11 @@ import ru.dfhub.parkourio.ParkourIO;
 import ru.dfhub.parkourio.common.Database;
 import ru.dfhub.parkourio.common.entity.Timeplayed;
 
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.logging.Level;
+import java.util.stream.Collectors;
 
 
 public class TimeplayedDAO {
@@ -56,4 +59,13 @@ public class TimeplayedDAO {
             ParkourIO.getInstance().getLogger().log(Level.WARNING, "Can't set timeplayed!\n" + e.getMessage());
         }
     });}
+
+    public static Set<String> getPlayers() {
+        try (Session session = Database.openNewSession()) {
+            Query<Timeplayed> query = session.createQuery("FROM Timeplayed", Timeplayed.class);
+            return query.getResultList().stream().map(Timeplayed::getPlayer).collect(Collectors.toSet());
+        } catch (Exception e) {
+            return Set.of();
+        }
+    }
 }
