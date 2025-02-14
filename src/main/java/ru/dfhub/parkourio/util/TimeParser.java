@@ -1,7 +1,16 @@
 package ru.dfhub.parkourio.util;
 
+import org.bukkit.command.CommandSender;
+import org.checkerframework.checker.nullness.qual.NonNull;
+import org.incendo.cloud.context.CommandContext;
+import org.incendo.cloud.context.CommandInput;
+import org.incendo.cloud.suggestion.Suggestion;
+import org.incendo.cloud.suggestion.SuggestionProvider;
+
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 public class TimeParser {
@@ -79,5 +88,27 @@ public class TimeParser {
     private static int lastNumOf(long number) {
         String str = String.valueOf(number);
         return Integer.parseInt(String.valueOf(str.charAt(str.length() - 1)));
+    }
+
+    public static class Suggestions implements SuggestionProvider<CommandSender> {
+
+        @Override
+        public @NonNull CompletableFuture<? extends @NonNull Iterable<? extends @NonNull Suggestion>> suggestionsFuture(@NonNull CommandContext<CommandSender> context, @NonNull CommandInput input) {
+
+            return CompletableFuture.supplyAsync(() -> {
+                List<String> suggestions = new ArrayList<>();
+
+                for (int i = 1; i <= 99; i++) {
+                    for (String let : List.of("s", "m", "h", "d", "w", "M")) {
+                        suggestions.add(i + let);
+                    }
+                }
+
+                suggestions.add("forever");
+                suggestions.add("permanent");
+
+                return suggestions.stream().map(Suggestion::suggestion).toList();
+            });
+        }
     }
 }

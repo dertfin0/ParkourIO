@@ -28,7 +28,7 @@ public class Ban implements CloudCommand {
                 .commandBuilder("tempban", "бан")
                 .permission("ru.dfhub.parkourio.punishments.ban")
                 .required("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
-                .required("duration", StringParser.stringParser())
+                .required("duration", StringParser.stringParser(), new TimeParser.Suggestions())
                 .optional("reason", StringParser.greedyStringParser())
                 .flag(manager.flagBuilder("silent").build())
                 .handler(this::handler)

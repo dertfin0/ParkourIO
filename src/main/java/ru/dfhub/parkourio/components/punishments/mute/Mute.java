@@ -30,7 +30,7 @@ public class Mute implements CloudCommand {
                 .commandBuilder("mute", "мут")
                 .flag(manager.flagBuilder("silent").build())
                 .required("player", StringParser.stringParser(), new TempPlayerListCache.Suggestions())
-                .required("duration", StringParser.stringParser())
+                .required("duration", StringParser.stringParser(), new TimeParser.Suggestions())
                 .optional("reason", StringParser.greedyStringParser())
                 .permission("ru.dfhub.parkourio.punishments.mute")
                 .handler(this::handle)
