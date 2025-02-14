@@ -11,7 +11,9 @@ import ru.dfhub.parkourio.common.Database;
 import ru.dfhub.parkourio.common.entity.Punishment;
 
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 public class PunishmentsDAO {
 
@@ -66,6 +68,32 @@ public class PunishmentsDAO {
             tx.commit();
 
             return result;
+        }
+    }
+
+    public static Set<String> getBannedPlayers() {
+        try (Session session = Database.openNewSession()) {
+            Query<Punishment> query = session.createQuery("FROM Punishment punishment WHERE punishment.type = 'BAN'", Punishment.class);
+            return query.getResultList()
+                    .stream()
+                    .filter(Punishment::isActive)
+                    .map(Punishment::getPlayer)
+                    .collect(Collectors.toSet());
+        } catch (Exception e) {
+            return Set.of();
+        }
+    }
+
+    public static Set<String> getMutedPlayers() {
+        try (Session session = Database.openNewSession()) {
+            Query<Punishment> query = session.createQuery("FROM Punishment punishment WHERE punishment.type = 'MUTE'", Punishment.class);
+            return query.getResultList()
+                    .stream()
+                    .filter(Punishment::isActive)
+                    .map(Punishment::getPlayer)
+                    .collect(Collectors.toSet());
+        } catch (Exception e) {
+            return Set.of();
         }
     }
 }
