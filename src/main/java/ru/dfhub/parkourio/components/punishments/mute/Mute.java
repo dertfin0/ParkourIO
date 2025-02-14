@@ -41,7 +41,11 @@ public class Mute implements CloudCommand {
         OfflinePlayer player = Bukkit.getOfflinePlayer(ctx.getOrDefault("player", "null"));
 
         boolean isSilent = ctx.getOrDefault("reason", "").contains("--silent");
-        String reason = ctx.getOrDefault("reason", "Причина не указана").replace("--silent", "");
+        String reason = ctx.getOrDefault("reason", "Причина не указана").replaceAll("--silent", "");
+
+        if (reason.isEmpty()) {
+            reason = "Причина не указана";
+        } // Если указан только --silent, без причины
 
         long duration;
         try {
@@ -52,7 +56,7 @@ public class Mute implements CloudCommand {
         }
 
 
-        new ParkourPlayer(player).mute(ctx.sender().getName(), duration, reason.isEmpty() ? "Причина не указана" : reason);
+        new ParkourPlayer(player).mute(ctx.sender().getName(), duration, reason);
 
         ctx.sender().sendMessage(miniMessage().deserialize(
                 (duration == -1 ? getMessage("punishments.mute.mute.muted-permanently.to-admin") : getMessage("punishments.mute.mute.muted.to-admin"))
@@ -66,7 +70,7 @@ public class Mute implements CloudCommand {
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%player%", player.getName())
                             .replace("%time%", TimeParser.longToString(duration))
-                            .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
+                            .replace("%reason%", reason)
             );
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.sendMessage(message);
@@ -78,7 +82,7 @@ public class Mute implements CloudCommand {
                     (duration == -1 ? getMessage("punishments.mute.mute.muted-permanently.to-player") : getMessage("punishments.mute.mute.muted.to-player"))
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%time%", TimeParser.longToString(duration))
-                            .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
+                            .replace("%reason%", reason)
             );
             player.getPlayer().sendMessage(message);
         }

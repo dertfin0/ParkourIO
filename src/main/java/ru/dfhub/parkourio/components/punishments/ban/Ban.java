@@ -41,6 +41,10 @@ public class Ban implements CloudCommand {
             boolean isSilent = ctx.getOrDefault("reason", "").contains("--silent");
             String reason = ctx.getOrDefault("reason", "Причина не указана").replace("--silent", "");
 
+            if (reason.isEmpty()) {
+                reason = "Причина не указана";
+            } // Если указан только --silent, без причины
+
             long duration;
             try {
                 duration = TimeParser.stringToLong(ctx.get("duration"));
@@ -63,7 +67,7 @@ public class Ban implements CloudCommand {
                             .replace("%admin%", ctx.sender().getName())
                             .replace("%player%", player.getName())
                             .replace("%time%", duration == -1 ? "<red>навсегда</red>" : "на <aqua>%s</aqua>".formatted(TimeParser.longToString(duration)))
-                            .replace("%reason%", ctx.getOrDefault("reason", "Причина не указана"))
+                            .replace("%reason%", reason)
             );
             for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
                 onlinePlayer.sendMessage(message);
