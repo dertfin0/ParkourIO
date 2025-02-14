@@ -93,7 +93,8 @@ public final class ParkourIO extends JavaPlugin {
                 new FakeKick(),
                 new Kick(),
                 new PunishmentsCommand(),
-                new TimeplayedCommand()
+                new TimeplayedCommand(),
+                new TextDisplayUtil()
         );
         registerSpawnWorld();
         ru.dfhub.DFPaperLib.enable();

@@ -19,7 +19,8 @@
 `ru.dfhub.parkourio.punishments.ban` - Команда /ban
 `ru.dfhub.parkourio.punishments.unban` - Команда /unban
 `ru.dfhub.parkourio.punishments.mute` - Команда /mute
-`ru.dfhub.parkourio.punishments.unmute` - Команда /mute
+`ru.dfhub.parkourio.punishments.unmute` - Команда /mute  
+`ru.dfhub.parkourio.command.text-display-util` - Команда /text-display-util
 
 ## Основные моменты 
 Каждый заход игрока на сервер подразумевает:
